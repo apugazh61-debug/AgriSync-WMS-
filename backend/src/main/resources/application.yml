@@ -1,0 +1,54 @@
+de.flapdoodle.mongodb.embedded.version: 4.4.18
+
+spring:
+  application:
+    name: warehouse-management-system
+
+  data:
+    mongodb:
+      port: 27777
+      database: ${MONGODB_DATABASE:wms}
+
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      password: ${REDIS_PASSWORD:redispassword}
+      timeout: 60000ms
+
+  cache:
+    type: simple
+
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: ${PORT:8080}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:wms-super-secret-key-2024-production-ready-warehouse-management-system}
+    expiration: ${JWT_EXPIRATION:86400000}
+
+  cors:
+    allowed-origins: ${CORS_ORIGINS:http://localhost:3000,http://localhost:5173,http://localhost:5174,http://localhost:5175,http://localhost:5180}
+
+logging:
+  level:
+    com.warehouse.wms: DEBUG
+    org.springframework.data.mongodb: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"

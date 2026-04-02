@@ -1,0 +1,883 @@
+﻿[INFO] Scanning for projects...
+[INFO] 
+[INFO] -------------------------< com.warehouse:wms >--------------------------
+[INFO] Building Warehouse Management System 1.0.0
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.2.0:run (default-cli) > test-compile @ wms >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ wms ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] Copying 0 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.11.0:compile (default-compile) @ wms ---
+[INFO] Nothing to compile - all classes are up to date
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ wms ---
+[INFO] skip non existing resourceDirectory D:\My_Projects\warehouse management\backend\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.11.0:testCompile (default-testCompile) @ wms ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] <<< spring-boot:3.2.0:run (default-cli) < test-compile @ wms <<<
+[INFO] 
+[INFO] 
+[INFO] --- spring-boot:3.2.0:run (default-cli) @ wms ---
+[INFO] Attaching agents: []
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.0)
+
+2026-04-02 16:58:30 - Starting WmsApplication using Java 17.0.18 with PID 12136 (D:\My_Projects\warehouse management\backend\target\classes started by HP in D:\My_Projects\warehouse management\backend)
+2026-04-02 16:58:30 - Running with Spring Boot v3.2.0, Spring v6.1.1
+2026-04-02 16:58:30 - No active profile set, falling back to 1 default profile: "default"
+2026-04-02 16:58:31 - Multiple Spring Data modules found, entering strict repository configuration mode
+2026-04-02 16:58:31 - Bootstrapping Spring Data MongoDB repositories in DEFAULT mode.
+2026-04-02 16:58:31 - Finished Spring Data repository scanning in 148 ms. Found 8 MongoDB repository interfaces.
+2026-04-02 16:58:31 - Bean 'de.flapdoodle.embed.mongo.spring.autoconfigure.EmbeddedMongoAutoConfiguration' of type [de.flapdoodle.embed.mongo.spring.autoconfigure.EmbeddedMongoAutoConfiguration] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). The currently created BeanPostProcessor [setHostAndPortToMongoProperties] is declared through a non-static factory method on that class; consider declaring it as static instead.
+2026-04-02 16:58:31 - Bean 'de.flapdoodle.mongodb.embedded-de.flapdoodle.embed.mongo.spring.autoconfigure.EmbeddedMongoProperties' of type [de.flapdoodle.embed.mongo.spring.autoconfigure.EmbeddedMongoProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [fixTransactionAndAuth]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-04-02 16:58:31 - Bean 'spring.data.mongodb-org.springframework.boot.autoconfigure.mongo.MongoProperties' of type [org.springframework.boot.autoconfigure.mongo.MongoProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying). Is this bean getting eagerly injected into a currently created BeanPostProcessor [fixTransactionAndAuth]? Check the corresponding BeanPostProcessor declaration and its dependencies.
+2026-04-02 16:58:31 - Tomcat initialized with port 8080 (http)
+2026-04-02 16:58:32 - Starting service [Tomcat]
+2026-04-02 16:58:32 - Starting Servlet engine: [Apache Tomcat/10.1.16]
+2026-04-02 16:58:32 - Initializing Spring embedded WebApplicationContext
+2026-04-02 16:58:32 - Root WebApplicationContext: initialization completed in 1534 ms
+2026-04-02 16:58:32 - sync server factory
+2026-04-02 16:58:33 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : starting...
+2026-04-02 16:58:33 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 0 %
+2026-04-02 16:58:34 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 10 %
+2026-04-02 16:58:35 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 20 %
+2026-04-02 16:58:36 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 30 %
+2026-04-02 16:58:37 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 40 %
+2026-04-02 16:58:38 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 50 %
+2026-04-02 16:58:39 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 60 %
+2026-04-02 16:58:39 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 70 %
+2026-04-02 16:58:40 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 80 %
+2026-04-02 16:58:41 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : 90 %
+2026-04-02 16:58:42 - download https://fastdl.mongodb.org/windows/mongodb-windows-x86_64-4.4.18.zip : finished
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.065+05:30"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"main","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.152+05:30"},"s":"I",  "c":"NETWORK",  "id":4648602, "ctx":"main","msg":"Implicit TCP FastOpen in use."}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.154+05:30"},"s":"I",  "c":"STORAGE",  "id":4615611, "ctx":"initandlisten","msg":"MongoDB starting","attr":{"pid":21936,"port":27777,"dbPath":"C:/Users/HP/AppData/Local/Temp/temp--b87189f5-3170-42b4-b9d3-509637dac940/mongod-database14993370721825147498","architecture":"64-bit","host":"ALFIYAAA"}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.154+05:30"},"s":"I",  "c":"CONTROL",  "id":23398,   "ctx":"initandlisten","msg":"Target operating system minimum version","attr":{"targetMinOS":"Windows 7/Windows Server 2008 R2"}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.155+05:30"},"s":"I",  "c":"CONTROL",  "id":23403,   "ctx":"initandlisten","msg":"Build Info","attr":{"buildInfo":{"version":"4.4.18","gitVersion":"8ed32b5c2c68ebe7f8ae2ebe8d23f36037a17dea","modules":[],"allocator":"tcmalloc","environment":{"distmod":"windows","distarch":"x86_64","target_arch":"x86_64"}}}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.155+05:30"},"s":"I",  "c":"CONTROL",  "id":51765,   "ctx":"initandlisten","msg":"Operating System","attr":{"os":{"name":"Microsoft Windows 10","version":"10.0 (build 26200)"}}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.155+05:30"},"s":"I",  "c":"CONTROL",  "id":21951,   "ctx":"initandlisten","msg":"Options set by command line","attr":{"options":{"net":{"bindIp":"127.0.0.1","port":27777},"security":{"authorization":"disabled"},"storage":{"dbPath":"C:\\Users\\HP\\AppData\\Local\\Temp\\temp--b87189f5-3170-42b4-b9d3-509637dac940\\mongod-database14993370721825147498","journal":{"enabled":false},"syncPeriodSecs":0.0}}}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.158+05:30"},"s":"I",  "c":"STORAGE",  "id":22315,   "ctx":"initandlisten","msg":"Opening WiredTiger","attr":{"config":"create,cache_size=7343M,session_max=33000,eviction=(threads_min=4,threads_max=4),config_base=false,statistics=(fast),log=(enabled=true,archive=true,path=journal,compressor=snappy),file_manager=(close_idle_time=100000,close_scan_interval=10,close_handle_minimum=250),statistics_log=(wait=0),verbose=[recovery_progress,checkpoint_progress,compact_progress],,log=(enabled=false),"}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.214+05:30"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":"[1775129326:213161][21936:140711180273184], txn-recover: [WT_VERB_RECOVERY | WT_VERB_RECOVERY_PROGRESS] Set global recovery timestamp: (0, 0)"}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.214+05:30"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"initandlisten","msg":"WiredTiger message","attr":{"message":"[1775129326:213681][21936:140711180273184], txn-recover: [WT_VERB_RECOVERY | WT_VERB_RECOVERY_PROGRESS] Set global oldest timestamp: (0, 0)"}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.246+05:30"},"s":"I",  "c":"STORAGE",  "id":4795906, "ctx":"initandlisten","msg":"WiredTiger opened","attr":{"durationMillis":88}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.246+05:30"},"s":"I",  "c":"RECOVERY", "id":23987,   "ctx":"initandlisten","msg":"WiredTiger recoveryTimestamp","attr":{"recoveryTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.288+05:30"},"s":"I",  "c":"STORAGE",  "id":22262,   "ctx":"initandlisten","msg":"Timestamp monitor starting"}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.313+05:30"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"admin.system.version","uuidDisposition":"provided","uuid":{"uuid":{"$uuid":"a6323ea8-68e0-4fa4-826e-8818e756b8e4"}},"options":{"uuid":{"$uuid":"a6323ea8-68e0-4fa4-826e-8818e756b8e4"}}}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.345+05:30"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"admin.system.version","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.346+05:30"},"s":"I",  "c":"COMMAND",  "id":20459,   "ctx":"initandlisten","msg":"Setting featureCompatibilityVersion","attr":{"newVersion":"4.4"}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.358+05:30"},"s":"I",  "c":"STORAGE",  "id":20536,   "ctx":"initandlisten","msg":"Flow Control is enabled on this deployment"}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.372+05:30"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"initandlisten","msg":"createCollection","attr":{"namespace":"local.startup_log","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"e7f47151-e96c-48c3-b5eb-8d3ceb8b3332"}},"options":{"capped":true,"size":10485760}}}
+2026-04-02 16:58:46 - {"t":{"$date":"2026-04-02T16:58:46.404+05:30"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"initandlisten","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"local.startup_log","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.762+05:30"},"s":"I",  "c":"FTDC",     "id":20625,   "ctx":"initandlisten","msg":"Initializing full-time diagnostic data capture","attr":{"dataDirectory":"C:/Users/HP/AppData/Local/Temp/temp--b87189f5-3170-42b4-b9d3-509637dac940/mongod-database14993370721825147498/diagnostic.data"}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.763+05:30"},"s":"I",  "c":"REPL",     "id":6015317, "ctx":"initandlisten","msg":"Setting new configuration state","attr":{"newState":"ConfigReplicationDisabled","oldState":"ConfigPreStart"}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.765+05:30"},"s":"I",  "c":"NETWORK",  "id":23015,   "ctx":"listener","msg":"Listening on","attr":{"address":"127.0.0.1"}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.765+05:30"},"s":"I",  "c":"NETWORK",  "id":23016,   "ctx":"listener","msg":"Waiting for connections","attr":{"port":27777,"ssl":"off"}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.765+05:30"},"s":"I",  "c":"CONTROL",  "id":20712,   "ctx":"LogicalSessionCacheReap","msg":"Sessions collection is not set up; waiting until next sessions reap interval","attr":{"error":"NamespaceNotFound: config.system.sessions does not exist"}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.765+05:30"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"LogicalSessionCacheRefresh","msg":"createCollection","attr":{"namespace":"config.system.sessions","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"c59cb7ee-a34f-45cd-a238-c3fa4eba63e4"}},"options":{}}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.827+05:30"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"config.system.sessions","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.828+05:30"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"LogicalSessionCacheRefresh","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"config.system.sessions","index":"lsidTTLIndex","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.953+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:62369","connectionId":1,"connectionCount":1}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.953+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:62368","connectionId":2,"connectionCount":2}}
+2026-04-02 16:58:47 - MongoClient with metadata {"driver": {"name": "mongo-java-driver|sync|spring-boot", "version": "4.11.1"}, "os": {"type": "Windows", "name": "Windows 11", "architecture": "amd64", "version": "10.0"}, "platform": "Java/Eclipse Adoptium/17.0.18+8"} created with settings MongoClientSettings{readPreference=primary, writeConcern=WriteConcern{w=null, wTimeout=null ms, journal=null}, retryWrites=true, retryReads=true, readConcern=ReadConcern{level=null}, credential=null, transportSettings=null, streamFactoryFactory=null, commandListeners=[], codecRegistry=ProvidersCodecRegistry{codecProviders=[ValueCodecProvider{}, BsonValueCodecProvider{}, DBRefCodecProvider{}, DBObjectCodecProvider{}, DocumentCodecProvider{}, CollectionCodecProvider{}, IterableCodecProvider{}, MapCodecProvider{}, GeoJsonCodecProvider{}, GridFSFileCodecProvider{}, Jsr310CodecProvider{}, JsonObjectCodecProvider{}, BsonCodecProvider{}, EnumCodecProvider{}, com.mongodb.client.model.mql.ExpressionCodecProvider@149d7cc6, com.mongodb.Jep395RecordCodecProvider@1a10c47e, com.mongodb.KotlinCodecProvider@d49e8c6]}, loggerSettings=LoggerSettings{maxDocumentLength=1000}, clusterSettings={hosts=[kubernetes.docker.internal:27777], srvServiceName=mongodb, mode=SINGLE, requiredClusterType=UNKNOWN, requiredReplicaSetName='null', serverSelector='null', clusterListeners='[]', serverSelectionTimeout='30000 ms', localThreshold='15 ms'}, socketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=0, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, heartbeatSocketSettings=SocketSettings{connectTimeoutMS=10000, readTimeoutMS=10000, receiveBufferSize=0, proxySettings=ProxySettings{host=null, port=null, username=null, password=null}}, connectionPoolSettings=ConnectionPoolSettings{maxSize=100, minSize=0, maxWaitTimeMS=120000, maxConnectionLifeTimeMS=0, maxConnectionIdleTimeMS=0, maintenanceInitialDelayMS=0, maintenanceFrequencyMS=60000, connectionPoolListeners=[], maxConnecting=2}, serverSettings=ServerSettings{heartbeatFrequencyMS=10000, minHeartbeatFrequencyMS=500, serverListeners='[]', serverMonitorListeners='[]'}, sslSettings=SslSettings{enabled=false, invalidHostNameAllowed=false, context=null}, applicationName='null', compressorList=[], uuidRepresentation=JAVA_LEGACY, serverApi=null, autoEncryptionSettings=null, dnsClient=null, inetAddressResolver=null, contextProvider=null}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.965+05:30"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn2","msg":"client metadata","attr":{"remote":"127.0.0.1:62368","client":"conn2","doc":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.11.1"},"os":{"type":"Windows","name":"Windows 11","architecture":"amd64","version":"10.0"},"platform":"Java/Eclipse Adoptium/17.0.18+8"}}}
+2026-04-02 16:58:47 - {"t":{"$date":"2026-04-02T16:58:47.965+05:30"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn1","msg":"client metadata","attr":{"remote":"127.0.0.1:62369","client":"conn1","doc":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.11.1"},"os":{"type":"Windows","name":"Windows 11","architecture":"amd64","version":"10.0"},"platform":"Java/Eclipse Adoptium/17.0.18+8"}}}
+2026-04-02 16:58:47 - Monitor thread successfully connected to server with description ServerDescription{address=kubernetes.docker.internal:27777, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=29341200}
+2026-04-02 16:58:48 - Filter 'jwtAuthFilter' configured for use
+2026-04-02 16:58:49 - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@749ee0e3, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@7891cf3, org.springframework.security.web.context.SecurityContextHolderFilter@813ab53, org.springframework.security.web.header.HeaderWriterFilter@7096d451, org.springframework.web.filter.CorsFilter@6bfbab1c, org.springframework.security.web.authentication.logout.LogoutFilter@d5a72cd, com.warehouse.wms.security.JwtAuthFilter@62158991, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@62c47480, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7de2bdc7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@349aeec4, org.springframework.security.web.session.SessionManagementFilter@1ab85862, org.springframework.security.web.access.ExceptionTranslationFilter@758d4aa9, org.springframework.security.web.access.intercept.AuthorizationFilter@5614ae05]
+2026-04-02 16:58:49 - Tomcat started on port 8080 (http) with context path ''
+2026-04-02 16:58:49 - Starting...
+2026-04-02 16:58:49 - BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@6c2f8ecb]]
+2026-04-02 16:58:49 - Started.
+2026-04-02 16:58:49 - Started WmsApplication in 19.66 seconds (process running for 20.055)
+2026-04-02 16:58:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 16:58:49 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 16:58:49 - Executing count: { "email" : "9943205075"} in collection: users
+2026-04-02 16:58:49 - {"t":{"$date":"2026-04-02T16:58:49.653+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:62371","connectionId":3,"connectionCount":3}}
+2026-04-02 16:58:49 - {"t":{"$date":"2026-04-02T16:58:49.654+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:62370","connectionId":4,"connectionCount":4}}
+2026-04-02 16:58:49 - {"t":{"$date":"2026-04-02T16:58:49.654+05:30"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn3","msg":"client metadata","attr":{"remote":"127.0.0.1:62371","client":"conn3","doc":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.11.1"},"os":{"type":"Windows","name":"Windows 11","architecture":"amd64","version":"10.0"},"platform":"Java/Eclipse Adoptium/17.0.18+8"}}}
+2026-04-02 16:58:49 - {"t":{"$date":"2026-04-02T16:58:49.654+05:30"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn4","msg":"client metadata","attr":{"remote":"127.0.0.1:62370","client":"conn4","doc":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.11.1"},"os":{"type":"Windows","name":"Windows 11","architecture":"amd64","version":"10.0"},"platform":"Java/Eclipse Adoptium/17.0.18+8"}}}
+2026-04-02 16:58:49 - Inserting Document containing fields: [name, email, password, role, _class] in collection: users
+2026-04-02 16:58:49 - {"t":{"$date":"2026-04-02T16:58:49.789+05:30"},"s":"I",  "c":"STORAGE",  "id":20320,   "ctx":"conn4","msg":"createCollection","attr":{"namespace":"wms.users","uuidDisposition":"generated","uuid":{"uuid":{"$uuid":"513b19b7-48c1-4ce4-bb55-6f00dcb2fb90"}},"options":{}}}
+2026-04-02 16:58:49 - {"t":{"$date":"2026-04-02T16:58:49.819+05:30"},"s":"I",  "c":"INDEX",    "id":20345,   "ctx":"conn4","msg":"Index build: done building","attr":{"buildUUID":null,"namespace":"wms.users","index":"_id_","commitTimestamp":{"$timestamp":{"t":0,"i":0}}}}
+Default Admin Account Created: 9943205075
+2026-04-02 16:59:49 - WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 3, active threads = 1, queued tasks = 1, completed tasks = 1]
+2026-04-02 17:03:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:07:47 - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-04-02 17:07:47 - Initializing Servlet 'dispatcherServlet'
+2026-04-02 17:07:47 - Completed initialization in 2 ms
+2026-04-02 17:07:47 - Cache miss for REQUEST dispatch to '/api/auth/login' (previous null). Performing MatchableHandlerMapping lookup. This is logged once only at WARN level, and every time at TRACE.
+2026-04-02 17:07:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:48 - Executing count: {} in collection: products
+2026-04-02 17:07:48 - Executing count: {} in collection: warehouses
+2026-04-02 17:07:48 - Executing count: {} in collection: suppliers
+2026-04-02 17:07:48 - Executing count: {} in collection: orders
+2026-04-02 17:07:48 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:07:48 - Created query Query: { "status" : { "$java" : PENDING } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - Executing count: { "status" : "PENDING"} in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "status" : { "$java" : DISPATCHED } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - Executing count: { "status" : "DISPATCHED"} in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "status" : { "$java" : PENDING } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - Executing count: { "status" : "PENDING"} in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "status" : { "$java" : PROCESSING } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - Executing count: { "status" : "PROCESSING"} in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "status" : { "$java" : DISPATCHED } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - Executing count: { "status" : "DISPATCHED"} in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "status" : { "$java" : DELIVERED } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - Executing count: { "status" : "DELIVERED"} in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "status" : { "$java" : CANCELLED } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - Executing count: { "status" : "CANCELLED"} in collection: orders
+2026-04-02 17:07:48 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Warehouse in collection: warehouses
+2026-04-02 17:07:48 - Created query Query: { "orderDate" : { "$gt" : { "$java" : 2025-11-01T00:00:48.474569600 }, "$lt" : { "$java" : 2025-12-01T00:00:48.474569600 } } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "orderDate" : { "$gt" : { "$date" : "2025-10-31T18:30:48.474Z"}, "$lt" : { "$date" : "2025-11-30T18:30:48.474Z"}}} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "orderDate" : { "$gt" : { "$java" : 2025-12-01T00:00:48.474569600 }, "$lt" : { "$java" : 2026-01-01T00:00:48.474569600 } } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "orderDate" : { "$gt" : { "$date" : "2025-11-30T18:30:48.474Z"}, "$lt" : { "$date" : "2025-12-31T18:30:48.474Z"}}} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "orderDate" : { "$gt" : { "$java" : 2026-01-01T00:00:48.474569600 }, "$lt" : { "$java" : 2026-02-01T00:00:48.474569600 } } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "orderDate" : { "$gt" : { "$date" : "2025-12-31T18:30:48.474Z"}, "$lt" : { "$date" : "2026-01-31T18:30:48.474Z"}}} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "orderDate" : { "$gt" : { "$java" : 2026-02-01T00:00:48.474569600 }, "$lt" : { "$java" : 2026-03-01T00:00:48.474569600 } } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "orderDate" : { "$gt" : { "$date" : "2026-01-31T18:30:48.474Z"}, "$lt" : { "$date" : "2026-02-28T18:30:48.474Z"}}} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "orderDate" : { "$gt" : { "$java" : 2026-03-01T00:00:48.474569600 }, "$lt" : { "$java" : 2026-04-01T00:00:48.474569600 } } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "orderDate" : { "$gt" : { "$date" : "2026-02-28T18:30:48.474Z"}, "$lt" : { "$date" : "2026-03-31T18:30:48.474Z"}}} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "orderDate" : { "$gt" : { "$java" : 2026-04-01T00:00:48.474569600 }, "$lt" : { "$java" : 2026-05-01T00:00:48.474569600 } } }, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "orderDate" : { "$gt" : { "$date" : "2026-03-31T18:30:48.474Z"}, "$lt" : { "$date" : "2026-04-30T18:30:48.474Z"}}} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:07:48 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:07:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:55 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:55 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:55 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:55 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:55 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Supplier in collection: suppliers
+2026-04-02 17:07:55 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Product in collection: products
+2026-04-02 17:07:55 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:55 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:55 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:55 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:56 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:56 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:56 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:56 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:56 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:56 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:56 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Warehouse in collection: warehouses
+2026-04-02 17:07:56 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:07:56 - {"t":{"$date":"2026-04-02T17:07:56.775+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:57446","connectionId":5,"connectionCount":5}}
+2026-04-02 17:07:56 - {"t":{"$date":"2026-04-02T17:07:56.776+05:30"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn5","msg":"client metadata","attr":{"remote":"127.0.0.1:57446","client":"conn5","doc":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.11.1"},"os":{"type":"Windows","name":"Windows 11","architecture":"amd64","version":"10.0"},"platform":"Java/Eclipse Adoptium/17.0.18+8"}}}
+2026-04-02 17:07:56 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:56 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:56 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:56 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:56 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:56 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:57 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:57 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:07:57 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:07:57 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:08:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:08:52 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:08:52 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:08:52 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:08:52 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:33 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:33 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:33 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:33 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:33 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:33 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:33 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:09:33 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:33 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:33 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:33 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:33 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:33 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:33 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:09:35 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:35 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:35 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:35 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:42 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:42 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:42 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:42 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:42 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:42 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:42 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:09:42 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:42 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:42 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:09:42 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:42 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:42 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:09:42 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:10:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:10:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:10:37 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:10:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:10:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:10:37 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:11:56 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:11:56 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:11:56 - findOne using query: { "id" : "69ce52f199a3596fa732b15a"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:11:56 - Saving Document containing fields: [_id, name, email, password, role, _class]
+2026-04-02 17:11:56 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:11:56 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:11:56 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:04 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:13:04 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:04 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:04 - Executing count: { "email" : "9943205042"} in collection: users
+2026-04-02 17:13:04 - Inserting Document containing fields: [name, email, password, role, _class] in collection: users
+2026-04-02 17:13:04 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:13:04 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:04 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:24 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:24 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:24 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:24 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:24 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:24 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:24 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:24 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:24 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:24 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:31 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:31 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:31 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:31 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:31 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:31 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:31 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:31 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:33 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:33 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:33 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:33 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:33 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:33 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:33 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:33 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:33 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:33 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:33 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:33 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:34 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:34 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:34 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:34 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:34 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:34 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:34 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:34 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:36 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:36 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:37 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:37 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:37 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:37 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:37 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:37 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:37 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:13:37 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:37 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:37 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:37 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:37 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:37 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:37 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:13:38 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:38 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:38 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:38 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:38 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:38 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:13:38 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:38 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:13:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:14:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:22 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:22 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:22 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:22 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:23 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:23 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:23 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:23 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:25 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:25 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:25 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:25 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:25 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:25 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:25 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:25 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:25 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:25 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:25 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:25 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:27 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:27 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:27 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:27 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:27 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:27 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:27 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:27 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:28 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:28 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:28 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:28 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:28 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:28 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:28 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:14:28 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:28 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:28 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:28 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:28 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:14:28 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:14:28 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:18:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:23:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:27:47 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:47 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:47 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:47 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:47 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:47 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:47 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:27:47 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:47 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:47 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:47 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:47 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:47 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:47 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:27:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:50 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:27:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:50 - {"t":{"$date":"2026-04-02T17:27:50.408+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:61008","connectionId":6,"connectionCount":6}}
+2026-04-02 17:27:50 - {"t":{"$date":"2026-04-02T17:27:50.409+05:30"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn6","msg":"client metadata","attr":{"remote":"127.0.0.1:61008","client":"conn6","doc":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.11.1"},"os":{"type":"Windows","name":"Windows 11","architecture":"amd64","version":"10.0"},"platform":"Java/Eclipse Adoptium/17.0.18+8"}}}
+2026-04-02 17:27:50 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:27:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:51 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:51 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:51 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:51 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:52 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:52 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:52 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:52 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:55 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:55 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:27:55 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:27:55 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:00 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:00 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:00 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:00 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:00 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:00 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:00 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:00 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:01 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:01 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:01 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:01 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:01 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:01 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:01 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:01 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:01 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:01 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:01 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:01 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:03 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:03 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:03 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:03 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:04 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:04 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:04 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:04 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:28:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:05 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:28:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:07 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:28:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:07 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:28:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:12 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:12 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:12 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:12 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:26 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:26 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:26 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:26 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:35 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:35 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:35 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:28:35 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:28:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:29:49 - WebSocketSession[1 current WS(1)-HttpStream(0)-HttpPoll(0), 6 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(6)-CONNECTED(6)-DISCONNECT(5)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 84], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 16], sockJsScheduler[pool size = 12, active threads = 1, queued tasks = 3, completed tasks = 275]
+2026-04-02 17:30:48 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:48 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:48 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:48 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:48 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:48 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:48 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:48 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:48 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:48 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:48 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:48 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:49 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:49 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:49 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:49 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:49 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:49 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:49 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:49 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:30:50 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:30:50 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:02 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:02 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:02 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:02 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:02 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:02 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:02 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:02 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:03 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:03 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:03 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:03 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:03 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:03 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:03 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:03 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:03 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:03 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:03 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:03 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:04 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:04 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:04 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:04 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:05 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:05 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:32:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:07 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:07 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:32:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:08 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:32:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:08 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:08 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:08 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:32:09 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:09 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:09 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:09 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:09 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:09 - Created query Query: { "email" : "9943205042"}, Fields: {}, Sort: {}
+2026-04-02 17:32:09 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:09 - find using query: { "email" : "9943205042"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:26 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:32:26 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:26 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:32:26 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:26 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:32:26 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:26 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:32:26 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:26 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:32:26 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:28 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:32:28 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:32:28 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:32:28 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:33:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:37:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:13 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:13 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:13 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:13 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:15 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:15 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:15 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:15 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:16 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:16 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:16 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:16 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:17 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:17 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:17 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:17 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:17 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:17 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:17 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:37:17 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:17 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:17 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:17 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:17 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:17 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:17 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Order in collection: orders
+2026-04-02 17:37:18 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:18 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:18 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:18 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:18 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:18 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:18 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:18 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:21 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:21 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:21 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:21 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:21 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:21 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:21 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:21 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:47 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:47 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:47 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:47 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:59 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:59 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:59 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:59 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:59 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:59 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:59 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:59 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:59 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:37:59 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:59 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:37:59 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:00 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:00 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:00 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:00 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:00 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:00 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:00 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:00 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:01 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:01 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:01 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:01 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:01 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:01 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:01 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:01 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:01 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:01 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:01 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:01 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:02 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:02 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:02 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:02 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:03 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:03 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:03 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:03 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:15 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:15 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:15 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:15 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:15 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:15 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:15 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:15 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:34 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:34 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:34 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:34 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:34 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:34 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:34 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:34 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:34 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:34 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:34 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:34 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
+2026-04-02 17:38:54 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:54 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:38:54 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:38:54 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:11 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:11 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:11 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:11 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:48 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:39:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:39:48 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:39:48 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:39:48 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:41:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:41:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:41:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:41:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:41:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:41:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:41:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:41:37 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:41:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:41:37 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.InboundShipment in collection: inbound_shipments
+2026-04-02 17:41:50 - {"t":{"$date":"2026-04-02T17:41:50.484+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:57144","connectionId":7,"connectionCount":7}}
+2026-04-02 17:41:50 - {"t":{"$date":"2026-04-02T17:41:50.485+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:57143","connectionId":8,"connectionCount":8}}
+2026-04-02 17:41:50 - {"t":{"$date":"2026-04-02T17:41:50.493+05:30"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn8","msg":"client metadata","attr":{"remote":"127.0.0.1:57143","client":"conn8","doc":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.11.1"},"os":{"type":"Windows","name":"Windows 11","architecture":"amd64","version":"10.0"},"platform":"Java/Eclipse Adoptium/17.0.18+8"}}}
+2026-04-02 17:41:50 - {"t":{"$date":"2026-04-02T17:41:50.493+05:30"},"s":"I",  "c":"NETWORK",  "id":51800,   "ctx":"conn7","msg":"client metadata","attr":{"remote":"127.0.0.1:57144","client":"conn7","doc":{"driver":{"name":"mongo-java-driver|sync|spring-boot","version":"4.11.1"},"os":{"type":"Windows","name":"Windows 11","architecture":"amd64","version":"10.0"},"platform":"Java/Eclipse Adoptium/17.0.18+8"}}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.193+05:30"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn8","msg":"Connection ended","attr":{"remote":"127.0.0.1:57143","connectionId":8,"connectionCount":7}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.197+05:30"},"s":"I",  "c":"NETWORK",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"127.0.0.1:57145","connectionId":9,"connectionCount":8}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.200+05:30"},"s":"I",  "c":"COMMAND",  "id":20475,   "ctx":"conn9","msg":"Terminating via shutdown command","attr":{"cmdObj":{"shutdown":1,"force":true,"timeoutSecs":0,"$db":"admin"}}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.200+05:30"},"s":"I",  "c":"COMMAND",  "id":4784901, "ctx":"conn9","msg":"Shutting down the MirrorMaestro"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.200+05:30"},"s":"I",  "c":"SHARDING", "id":4784902, "ctx":"conn9","msg":"Shutting down the WaitForMajorityService"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.203+05:30"},"s":"I",  "c":"CONTROL",  "id":4784903, "ctx":"conn9","msg":"Shutting down the LogicalSessionCache"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.206+05:30"},"s":"I",  "c":"NETWORK",  "id":20562,   "ctx":"conn9","msg":"Shutdown: going to close listening sockets"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.206+05:30"},"s":"I",  "c":"NETWORK",  "id":4784905, "ctx":"conn9","msg":"Shutting down the global connection pool"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.206+05:30"},"s":"I",  "c":"STORAGE",  "id":4784906, "ctx":"conn9","msg":"Shutting down the FlowControlTicketholder"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.206+05:30"},"s":"I",  "c":"-",        "id":20520,   "ctx":"conn9","msg":"Stopping further Flow Control ticket acquisitions."}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.206+05:30"},"s":"I",  "c":"STORAGE",  "id":4784908, "ctx":"conn9","msg":"Shutting down the PeriodicThreadToAbortExpiredTransactions"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.207+05:30"},"s":"I",  "c":"STORAGE",  "id":4784934, "ctx":"conn9","msg":"Shutting down the PeriodicThreadToDecreaseSnapshotHistoryCachePressure"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.207+05:30"},"s":"I",  "c":"REPL",     "id":4784909, "ctx":"conn9","msg":"Shutting down the ReplicationCoordinator"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.207+05:30"},"s":"I",  "c":"SHARDING", "id":4784910, "ctx":"conn9","msg":"Shutting down the ShardingInitializationMongoD"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.207+05:30"},"s":"I",  "c":"REPL",     "id":4784911, "ctx":"conn9","msg":"Enqueuing the ReplicationStateTransitionLock for shutdown"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.207+05:30"},"s":"I",  "c":"-",        "id":4784912, "ctx":"conn9","msg":"Killing all operations for shutdown"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.207+05:30"},"s":"I",  "c":"-",        "id":4695300, "ctx":"conn9","msg":"Interrupted all currently running operations","attr":{"opsKilled":4}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.207+05:30"},"s":"I",  "c":"COMMAND",  "id":4784913, "ctx":"conn9","msg":"Shutting down all open transactions"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.208+05:30"},"s":"I",  "c":"REPL",     "id":4784914, "ctx":"conn9","msg":"Acquiring the ReplicationStateTransitionLock for shutdown"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.208+05:30"},"s":"I",  "c":"INDEX",    "id":4784915, "ctx":"conn9","msg":"Shutting down the IndexBuildsCoordinator"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.208+05:30"},"s":"I",  "c":"REPL",     "id":4784916, "ctx":"conn9","msg":"Reacquiring the ReplicationStateTransitionLock for shutdown"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.208+05:30"},"s":"I",  "c":"REPL",     "id":4784917, "ctx":"conn9","msg":"Attempting to mark clean shutdown"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.208+05:30"},"s":"I",  "c":"NETWORK",  "id":4784918, "ctx":"conn9","msg":"Shutting down the ReplicaSetMonitor"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.209+05:30"},"s":"I",  "c":"SHARDING", "id":4784921, "ctx":"conn9","msg":"Shutting down the MigrationUtilExecutor"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.209+05:30"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn7","msg":"Connection ended","attr":{"remote":"127.0.0.1:57144","connectionId":7,"connectionCount":7}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.210+05:30"},"s":"I",  "c":"CONTROL",  "id":4784925, "ctx":"conn9","msg":"Shutting down free monitoring"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.210+05:30"},"s":"I",  "c":"CONTROL",  "id":20609,   "ctx":"conn9","msg":"Shutting down free monitoring"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.211+05:30"},"s":"I",  "c":"STORAGE",  "id":4784927, "ctx":"conn9","msg":"Shutting down the HealthLog"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.211+05:30"},"s":"I",  "c":"STORAGE",  "id":4784929, "ctx":"conn9","msg":"Acquiring the global lock for shutdown"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.211+05:30"},"s":"I",  "c":"STORAGE",  "id":4784930, "ctx":"conn9","msg":"Shutting down the storage engine"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.211+05:30"},"s":"I",  "c":"STORAGE",  "id":22320,   "ctx":"conn9","msg":"Shutting down journal flusher thread"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.212+05:30"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn2","msg":"Connection ended","attr":{"remote":"127.0.0.1:62368","connectionId":2,"connectionCount":6}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.216+05:30"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"JournalFlusher","msg":"WiredTiger message","attr":{"message":"[1775131912:216087][21936:140711180273184], WT_SESSION.checkpoint: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 73, snapshot max: 73 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}
+2026-04-02 17:41:52 - Exception in monitor thread while connecting to server kubernetes.docker.internal:27777
+com.mongodb.MongoNodeIsRecoveringException: Command failed with error 11600 (InterruptedAtShutdown): 'interrupted at shutdown' on server kubernetes.docker.internal:27777. The full response is {"ok": 0.0, "errmsg": "interrupted at shutdown", "code": 11600, "codeName": "InterruptedAtShutdown"}
+	at com.mongodb.internal.connection.ProtocolHelper.createSpecialException(ProtocolHelper.java:251)
+	at com.mongodb.internal.connection.ProtocolHelper.getCommandFailureException(ProtocolHelper.java:201)
+	at com.mongodb.internal.connection.InternalStreamConnection.receiveCommandMessageResponse(InternalStreamConnection.java:454)
+	at com.mongodb.internal.connection.InternalStreamConnection.receive(InternalStreamConnection.java:404)
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.lookupServerDescription(DefaultServerMonitor.java:224)
+	at com.mongodb.internal.connection.DefaultServerMonitor$ServerMonitorRunnable.run(DefaultServerMonitor.java:156)
+	at java.base/java.lang.Thread.run(Thread.java:840)
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.227+05:30"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn5","msg":"Connection ended","attr":{"remote":"127.0.0.1:57446","connectionId":5,"connectionCount":5}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.228+05:30"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn3","msg":"Connection ended","attr":{"remote":"127.0.0.1:62371","connectionId":3,"connectionCount":4}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.228+05:30"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn6","msg":"Connection ended","attr":{"remote":"127.0.0.1:61008","connectionId":6,"connectionCount":3}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.228+05:30"},"s":"I",  "c":"NETWORK",  "id":22944,   "ctx":"conn4","msg":"Connection ended","attr":{"remote":"127.0.0.1:62370","connectionId":4,"connectionCount":2}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.246+05:30"},"s":"I",  "c":"STORAGE",  "id":22321,   "ctx":"conn9","msg":"Finished shutting down journal flusher thread"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.246+05:30"},"s":"I",  "c":"STORAGE",  "id":20282,   "ctx":"conn9","msg":"Deregistering all the collections"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.248+05:30"},"s":"I",  "c":"STORAGE",  "id":22261,   "ctx":"conn9","msg":"Timestamp monitor shutting down"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.248+05:30"},"s":"I",  "c":"STORAGE",  "id":22317,   "ctx":"conn9","msg":"WiredTigerKVEngine shutting down"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.249+05:30"},"s":"I",  "c":"STORAGE",  "id":22318,   "ctx":"conn9","msg":"Shutting down session sweeper thread"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.249+05:30"},"s":"I",  "c":"STORAGE",  "id":22319,   "ctx":"conn9","msg":"Finished shutting down session sweeper thread"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.249+05:30"},"s":"I",  "c":"STORAGE",  "id":22322,   "ctx":"conn9","msg":"Shutting down checkpoint thread"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.249+05:30"},"s":"I",  "c":"STORAGE",  "id":22323,   "ctx":"conn9","msg":"Finished shutting down checkpoint thread"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.249+05:30"},"s":"I",  "c":"STORAGE",  "id":4795902, "ctx":"conn9","msg":"Closing WiredTiger","attr":{"closeConfig":"leak_memory=true,"}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.251+05:30"},"s":"I",  "c":"STORAGE",  "id":22430,   "ctx":"conn9","msg":"WiredTiger message","attr":{"message":"[1775131912:251026][21936:140711180273184], close_ckpt: [WT_VERB_CHECKPOINT_PROGRESS] saving checkpoint snapshot min: 75, snapshot max: 75 snapshot count: 0, oldest timestamp: (0, 0) , meta checkpoint timestamp: (0, 0) base write gen: 1"}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.302+05:30"},"s":"I",  "c":"STORAGE",  "id":4795901, "ctx":"conn9","msg":"WiredTiger closed","attr":{"durationMillis":53}}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.302+05:30"},"s":"I",  "c":"STORAGE",  "id":22281,   "ctx":"conn9","msg":"shutdown: removing fs lock..."}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.302+05:30"},"s":"I",  "c":"-",        "id":4784931, "ctx":"conn9","msg":"Dropping the scope cache for shutdown"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.302+05:30"},"s":"I",  "c":"FTDC",     "id":4784926, "ctx":"conn9","msg":"Shutting down full-time data capture"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.302+05:30"},"s":"I",  "c":"FTDC",     "id":20626,   "ctx":"conn9","msg":"Shutting down full-time diagnostic data capture"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.308+05:30"},"s":"I",  "c":"CONTROL",  "id":20565,   "ctx":"conn9","msg":"Now exiting"}
+2026-04-02 17:41:52 - {"t":{"$date":"2026-04-02T17:41:52.308+05:30"},"s":"I",  "c":"CONTROL",  "id":23138,   "ctx":"conn9","msg":"Shutting down","attr":{"exitCode":0}}
+2026-04-02 17:42:02 - Monitor thread successfully connected to server with description ServerDescription{address=kubernetes.docker.internal:27777, type=STANDALONE, state=CONNECTED, ok=true, minWireVersion=0, maxWireVersion=9, maxDocumentSize=16777216, logicalSessionTimeoutMinutes=30, roundTripTimeNanos=1130600}
+2026-04-02 17:42:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:42:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:42:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:42:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:42:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:42:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:42:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:42:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:42:12 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:42:12 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:42:12 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:42:12 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:42:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:42:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:42:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:42:12 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:42:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:42:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:42:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:42:12 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:42:12 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:42:12 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:42:12 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:42:12 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:43:10 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:43:10 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:43:10 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:43:10 - Created query Query: { "email" : "9943205075"}, Fields: {}, Sort: {}
+2026-04-02 17:43:10 - find using query: { "email" : "9943205075"} fields: Document{{}} for class: class com.warehouse.wms.model.User in collection: users
+2026-04-02 17:43:10 - Cannot set user authentication: User not found with email: 9943205075
+2026-04-02 17:43:49 - find using query: {} fields: Document{{}} for class: class com.warehouse.wms.model.Inventory in collection: inventory
