@@ -28,3 +28,9 @@ frontend/.vite/
 .vscode/
 .gemini/
 /tmp/
+
+# Ignore generated documents
+*.docx
+~$*.docx
+app_screenshot.png
+generate_doc.py
