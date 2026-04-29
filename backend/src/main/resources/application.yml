@@ -6,8 +6,7 @@ spring:
 
   data:
     mongodb:
-      port: 27777
-      database: ${MONGODB_DATABASE:wms}
+      uri: ${MONGODB_URI:mongodb://localhost:27017/wms}
 
     redis:
       host: ${REDIS_HOST:localhost}
