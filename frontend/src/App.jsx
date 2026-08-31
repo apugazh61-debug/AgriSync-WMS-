@@ -15,6 +15,13 @@ import QrScannerPage from './pages/QrScannerPage';
 import SettingsPage from './pages/SettingsPage';
 import EmployeesPage from './pages/EmployeesPage';
 
+// Enterprise Agricultural Modules
+import IoTTelemetryPage from './pages/IoTTelemetryPage';
+import BatchLotsPage from './pages/BatchLotsPage';
+import PurchaseOrdersPage from './pages/PurchaseOrdersPage';
+import GatePassPage from './pages/GatePassPage';
+import WarehouseZonesPage from './pages/WarehouseZonesPage';
+
 function ProtectedRoute({ children, reqRole }) {
   const { user } = useAuth();
   if (!user) return <Navigate to="/login" replace />;
@@ -41,6 +48,14 @@ function AppRoutes() {
       <Route path="/" element={<Navigate to="/dashboard" replace />} />
 
       <Route path="/dashboard" element={<ProtectedRoute><AppLayout><DashboardPage /></AppLayout></ProtectedRoute>} />
+      
+      {/* Enterprise Agri Modules */}
+      <Route path="/iot-telemetry" element={<ProtectedRoute><AppLayout><IoTTelemetryPage /></AppLayout></ProtectedRoute>} />
+      <Route path="/batch-lots" element={<ProtectedRoute><AppLayout><BatchLotsPage /></AppLayout></ProtectedRoute>} />
+      <Route path="/purchase-orders" element={<ProtectedRoute><AppLayout><PurchaseOrdersPage /></AppLayout></ProtectedRoute>} />
+      <Route path="/gate-passes" element={<ProtectedRoute><AppLayout><GatePassPage /></AppLayout></ProtectedRoute>} />
+      <Route path="/zones" element={<ProtectedRoute><AppLayout><WarehouseZonesPage /></AppLayout></ProtectedRoute>} />
+
       <Route path="/products" element={<ProtectedRoute><AppLayout><ProductsPage /></AppLayout></ProtectedRoute>} />
       <Route path="/inventory" element={<ProtectedRoute><AppLayout><InventoryPage /></AppLayout></ProtectedRoute>} />
       <Route path="/warehouses" element={<ProtectedRoute><AppLayout><WarehousesPage /></AppLayout></ProtectedRoute>} />

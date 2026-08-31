@@ -1,19 +1,9 @@
 package com.warehouse.wms.util;
 
-import com.warehouse.wms.model.Product;
-import com.warehouse.wms.model.Inventory;
-import com.warehouse.wms.model.Warehouse;
-import com.warehouse.wms.model.Supplier;
-import com.warehouse.wms.model.Order;
-import com.warehouse.wms.model.OrderItem;
-import com.warehouse.wms.model.InboundShipment;
-import com.warehouse.wms.model.InboundItem;
-import com.warehouse.wms.repository.ProductRepository;
-import com.warehouse.wms.repository.InventoryRepository;
-import com.warehouse.wms.repository.WarehouseRepository;
-import com.warehouse.wms.repository.SupplierRepository;
-import com.warehouse.wms.repository.OrderRepository;
-import com.warehouse.wms.repository.InboundShipmentRepository;
+import com.warehouse.wms.model.*;
+import com.warehouse.wms.repository.*;
+import com.warehouse.wms.service.IoTMonitoringService;
+import com.warehouse.wms.service.ReportAndBarcodeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
@@ -21,13 +11,7 @@ import org.springframework.stereotype.Component;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 @Component
 @RequiredArgsConstructor
@@ -40,21 +24,31 @@ public class DataInitializer implements CommandLineRunner {
     private final SupplierRepository supplierRepository;
     private final OrderRepository orderRepository;
     private final InboundShipmentRepository inboundShipmentRepository;
+    private final BatchLotRepository batchLotRepository;
+    private final WarehouseZoneRepository zoneRepository;
+    private final PurchaseOrderRepository purchaseOrderRepository;
+    private final GatePassRepository gatePassRepository;
+    private final IoTMonitoringService ioTService;
+    private final ReportAndBarcodeService barcodeService;
     private final BarcodeQrUtil barcodeQrUtil;
 
     @Override
     public void run(String... args) {
-        System.out.println("🚜 Agricultural Data Catalyst Initialized...");
+        System.out.println("🚜 Agricultural Data Catalyst Initializing...");
         
-        // Always refresh data if we want exactly 200 new items
+        // Clean existing collections to ensure synchronized relational integrity
         productRepository.deleteAll();
         inventoryRepository.deleteAll();
         warehouseRepository.deleteAll();
         supplierRepository.deleteAll();
         orderRepository.deleteAll();
         inboundShipmentRepository.deleteAll();
+        batchLotRepository.deleteAll();
+        zoneRepository.deleteAll();
+        purchaseOrderRepository.deleteAll();
+        gatePassRepository.deleteAll();
 
-        // 1. Seed 8 Professional Suppliers (Seed Labs & Chem Orgs)
+        // 1. Seed Professional Suppliers
         List<Supplier> suppliers = new ArrayList<>();
         String[][] supplierData = {
             {"Agri-Genetics Lab", "+91 90000 10001", "lab@agrigen.com", "Hyderabad Bio-Valley"},
@@ -86,7 +80,44 @@ public class DataInitializer implements CommandLineRunner {
             warehouses.add(warehouseRepository.save(w));
         }
 
-        // 3. Generate exactly 200 Products
+        // 3. Seed Multi-Zone Layout for Main Warehouses
+        for (Warehouse wh : warehouses) {
+            WarehouseZone.StorageBin bin1 = WarehouseZone.StorageBin.builder().binCode("BIN-A01").capacityUnits(500).storedUnits(380).isAvailable(false).productName("Basmati Paddy").build();
+            WarehouseZone.StorageBin bin2 = WarehouseZone.StorageBin.builder().binCode("BIN-A02").capacityUnits(500).storedUnits(120).isAvailable(true).productName("Organic Wheat").build();
+            WarehouseZone.StorageBin bin3 = WarehouseZone.StorageBin.builder().binCode("BIN-A03").capacityUnits(500).storedUnits(0).isAvailable(true).build();
+
+            WarehouseZone silo = WarehouseZone.builder()
+                    .warehouseId(wh.getWarehouseId())
+                    .zoneCode("Z-SILO-" + wh.getName().substring(0, 3).toUpperCase())
+                    .name(wh.getName() + " - Grain Silo Alpha")
+                    .zoneType(WarehouseZone.ZoneType.GRAIN_SILO)
+                    .totalCapacityTons(1200.0)
+                    .occupiedCapacityTons(780.0)
+                    .occupancyPercentage(65.0)
+                    .targetTemperature(19.0)
+                    .targetHumidity(58.0)
+                    .ventilationStatus("ACTIVE_AERATION")
+                    .bins(List.of(bin1, bin2, bin3))
+                    .build();
+            zoneRepository.save(silo);
+
+            WarehouseZone coldVault = WarehouseZone.builder()
+                    .warehouseId(wh.getWarehouseId())
+                    .zoneCode("Z-COLD-" + wh.getName().substring(0, 3).toUpperCase())
+                    .name(wh.getName() + " - Cold Chamber Vault")
+                    .zoneType(WarehouseZone.ZoneType.COLD_STORAGE)
+                    .totalCapacityTons(600.0)
+                    .occupiedCapacityTons(490.0)
+                    .occupancyPercentage(81.6)
+                    .targetTemperature(4.0)
+                    .targetHumidity(88.0)
+                    .ventilationStatus("REFRIGERATED")
+                    .bins(List.of(bin1, bin2))
+                    .build();
+            zoneRepository.save(coldVault);
+        }
+
+        // 4. Generate Products (Seeds, Fertilizers, Crops, Eco-Pesticides)
         Map<String, String[]> categories = new HashMap<>();
         categories.put("High-Yield Seeds", new String[]{"Basmati S3 Paddy", "Hybrid Maize X-12", "Organic Wheat Gold", "Sona Masuri G2", "Chilli Guntur S4", "Cotton BT-Elite", "Soybean Max-Pro", "Mustard Yellow G1", "Millet Ragi Super", "Tomato Hybrid Red"});
         categories.put("Advanced Fertilizers", new String[]{"NPK 19-19-19 Bio", "Water Soluble Potash", "Zinc-Sulfate 21%", "Chelated Micronutrients", "Neem-Coated Urea", "Organic Vermipost", "Liquid Seaweed Extract", "DAP Phosphatic Mix", "Ammonium Sulfate XL", "Boron Granules"});
@@ -97,11 +128,8 @@ public class DataInitializer implements CommandLineRunner {
         Random random = new Random();
         List<Product> products = new ArrayList<>();
 
-
-
         for (Map.Entry<String, String[]> entry : categories.entrySet()) {
             for (String baseItem : entry.getValue()) {
-                // Each base item gets 4 variations (40 per category * 5 categories = 200)
                 for (int i = 1; i <= 4; i++) {
                     String name = baseItem + " (Batch " + (1000 + i) + ")";
                     String barcode = "AGRI-" + (100000 + random.nextInt(900000));
@@ -119,61 +147,111 @@ public class DataInitializer implements CommandLineRunner {
             }
         }
 
-        // 4. Populate Inventory (Sentinel Stock) - Ensure ALL 200 items have stock
-        for (Product p : products) {
-            // Assign each product to 1-3 warehouses
-            int numWh = 1 + random.nextInt(3);
-            List<Warehouse> shuffledWh = new ArrayList<>(warehouses);
-            Collections.shuffle(shuffledWh);
-            for (int i = 0; i < numWh; i++) {
-                Inventory inventory = Objects.requireNonNull(
-                    Inventory.builder()
-                        .productId(p.getProductId())
-                        .warehouseId(shuffledWh.get(i).getWarehouseId())
-                        .stockQuantity(100 + random.nextInt(2000))
-                        .reorderLevel(50 + random.nextInt(100))
-                        .lastUpdated(LocalDateTime.now().minusMinutes(random.nextInt(10000)))
-                        .build(),
-                    "Inventory build() must not return null"
-                );
-                inventoryRepository.save(inventory);
-            }
-        }
-
-        // 5. Build 60 Dispatch Orders
-        for (int i = 0; i < 60; i++) {
-            List<OrderItem> items = new ArrayList<>();
-            for (int k = 0; k < 2 + random.nextInt(4); k++) {
-                items.add(OrderItem.builder()
-                        .productId(products.get(random.nextInt(products.size())).getProductId())
-                        .quantity(1 + random.nextInt(20))
-                        .build());
-            }
-            orderRepository.save(Objects.requireNonNull(Order.builder()
-                    .warehouseId(warehouses.get(random.nextInt(warehouses.size())).getWarehouseId())
-                    .orderDate(LocalDateTime.now().minusDays(random.nextInt(90)))
-                    .status(Order.OrderStatus.values()[random.nextInt(Order.OrderStatus.values().length)])
-                    .items(items)
-                    .build()));
-        }
-
-        // 6. Build 40 Inbound Registry Records
-        for (int i = 0; i < 40; i++) {
-            List<InboundItem> items = new ArrayList<>();
-            items.add(InboundItem.builder()
-                    .productId(products.get(random.nextInt(products.size())).getProductId())
-                    .quantity(500 + random.nextInt(1000))
-                    .build());
+        // 5. Populate Inventory & Agricultural FEFO Batch Lots
+        for (int pIdx = 0; pIdx < products.size(); pIdx++) {
+            Product p = products.get(pIdx);
+            Warehouse wh = warehouses.get(random.nextInt(warehouses.size()));
             
-            inboundShipmentRepository.save(Objects.requireNonNull(InboundShipment.builder()
-                    .supplierId(suppliers.get(random.nextInt(suppliers.size())).getSupplierId())
-                    .warehouseId(warehouses.get(random.nextInt(warehouses.size())).getWarehouseId())
-                    .receivedDate(LocalDate.now().minusDays(random.nextInt(30)))
-                    .batchNumber("AGRI-BATCH-" + (20000 + random.nextInt(80000)))
-                    .items(items)
-                    .build()));
+            int stockQty = 50 + random.nextInt(1200);
+            int reorderLevel = 100 + random.nextInt(150);
+
+            Inventory inventory = Inventory.builder()
+                    .productId(p.getProductId())
+                    .warehouseId(wh.getWarehouseId())
+                    .stockQuantity(stockQty)
+                    .reorderLevel(reorderLevel)
+                    .lastUpdated(LocalDateTime.now().minusMinutes(random.nextInt(10000)))
+                    .build();
+            inventoryRepository.save(inventory);
+
+            // Create FEFO Batch Lot
+            LocalDate harvest = LocalDate.now().minusMonths(1 + random.nextInt(6));
+            LocalDate expiry = (pIdx % 5 == 0) 
+                    ? LocalDate.now().plusDays(10 + random.nextInt(25)) // Expiring Soon Lot
+                    : LocalDate.now().plusMonths(4 + random.nextInt(14)); // Fresh Lot
+
+            BatchLot lot = BatchLot.builder()
+                    .batchNumber("LOT-2026-" + (pIdx < 10 ? "0" + pIdx : pIdx) + "-" + p.getName().substring(0, Math.min(4, p.getName().length())).toUpperCase())
+                    .productId(p.getProductId())
+                    .productName(p.getName())
+                    .warehouseId(wh.getWarehouseId())
+                    .warehouseName(wh.getName())
+                    .initialQuantity(stockQty + 200)
+                    .remainingQuantity(stockQty)
+                    .unit("BAGS")
+                    .harvestDate(harvest)
+                    .receivedDate(harvest.plusWeeks(2))
+                    .expiryDate(expiry)
+                    .qualityGrade(pIdx % 3 == 0 ? BatchLot.QualityGrade.SEED_CERTIFIED_EXPORT : BatchLot.QualityGrade.GRADE_A_PREMIUM)
+                    .moistureAtIntake(11.8 + (random.nextDouble() * 2.5))
+                    .storageBinLocation("SILO-A" + (1 + random.nextInt(3)) + " / BIN-" + (10 + random.nextInt(50)))
+                    .expiryStatus(expiry.isBefore(LocalDate.now().plusDays(45)) ? BatchLot.ExpiryStatus.EXPIRING_SOON : BatchLot.ExpiryStatus.FRESH)
+                    .daysToExpiry((int) java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(), expiry))
+                    .createdAt(LocalDateTime.now().minusDays(30))
+                    .lastUpdated(LocalDateTime.now())
+                    .build();
+            batchLotRepository.save(lot);
         }
 
-        System.out.println("✅ Agricultural Engine Synchronized: 200 High-Identity Assets Loaded.");
+        // 6. Build Sample Purchase Orders (Auto-Replenishment)
+        PurchaseOrder.PurchaseOrderItem poItem1 = PurchaseOrder.PurchaseOrderItem.builder()
+                .productId(products.get(0).getProductId())
+                .productName(products.get(0).getName())
+                .quantity(450)
+                .unitPrice(1200.0)
+                .subtotal(540000.0)
+                .unit("BAGS")
+                .build();
+
+        PurchaseOrder po1 = PurchaseOrder.builder()
+                .poNumber("PO-2026-AUT-101")
+                .supplierId(suppliers.get(0).getSupplierId())
+                .supplierName(suppliers.get(0).getName())
+                .warehouseId(warehouses.get(0).getWarehouseId())
+                .warehouseName(warehouses.get(0).getName())
+                .items(List.of(poItem1))
+                .totalAmount(540000.0)
+                .status(PurchaseOrder.POStatus.AUTO_SUGGESTED)
+                .triggerReason("AI Sentinel: Stock dropped below safety threshold (Deficit: 450 Bags)")
+                .isAiGenerated(true)
+                .expectedDeliveryDate(LocalDate.now().plusDays(4))
+                .createdAt(LocalDateTime.now().minusHours(2))
+                .build();
+        purchaseOrderRepository.save(po1);
+
+        // 7. Build Sample Digital Gate Passes
+        barcodeService.generateQRCodeBase64("TEST", 100, 100);
+        GatePass.GatePassItem gpItem = GatePass.GatePassItem.builder()
+                .productId(products.get(0).getProductId())
+                .productName(products.get(0).getName())
+                .batchNumber("LOT-2026-01-BASM")
+                .quantity(350)
+                .unit("BAGS")
+                .build();
+
+        GatePass gatePass = GatePass.builder()
+                .passNumber("GP-AGRI-2026-901")
+                .passType(GatePass.GatePassType.OUTBOUND_DISPATCH)
+                .referenceId("ORD-9011")
+                .warehouseId(warehouses.get(0).getWarehouseId())
+                .warehouseName(warehouses.get(0).getName())
+                .vehicleNumber("TN-28-AG-4412")
+                .driverName("M. Murugan")
+                .driverPhone("9842101234")
+                .transporterName("Kaveri Agri Transport Logistics")
+                .items(List.of(gpItem))
+                .totalWeightKg(17500.0)
+                .qrCodeBase64(barcodeService.generateQRCodeBase64("AGRI-WMS-GATEPASS:GP-AGRI-2026-901|VEHICLE:TN-28-AG-4412|DRIVER:M. Murugan", 260, 260))
+                .verificationHash("3c8e41a998b2f1")
+                .status(GatePass.GatePassStatus.ISSUED)
+                .issuedAt(LocalDateTime.now().minusMinutes(40))
+                .issuedBy("Security Dispatch Sentinel")
+                .build();
+        gatePassRepository.save(gatePass);
+
+        // 8. Capture Initial IoT Sensor Telemetry
+        ioTService.captureIoTSensorTelemetry();
+
+        System.out.println("✅ Agricultural Enterprise Engine Synchronized: IoT Telemetry, FEFO Lots, Multi-Zones, and AI POs Ready.");
     }
 }

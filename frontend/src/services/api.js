@@ -118,6 +118,47 @@ export const predictionAPI = {
   getDemand: (productId) => api.get(`/prediction/demand/${productId}`),
 };
 
+// IoT Telemetry
+export const iotAPI = {
+  getLatest: () => api.get('/iot/latest'),
+  getByWarehouse: (whId) => api.get(`/iot/warehouse/${whId}`),
+  simulate: () => api.post('/iot/simulate'),
+};
+
+// Batch & FEFO Expiry
+export const batchAPI = {
+  getAll: () => api.get('/batches'),
+  getExpiringSoon: () => api.get('/batches/expiring-soon'),
+  getFefoAllocation: (productId, qty = 100) => api.get(`/batches/fefo-allocation?productId=${productId}&quantity=${qty}`),
+  create: (data) => api.post('/batches', data),
+};
+
+// Purchase Orders (Auto-Replenishment)
+export const poAPI = {
+  getAll: () => api.get('/purchase-orders'),
+  autoEvaluate: () => api.post('/purchase-orders/auto-evaluate'),
+  approve: (id, approvedBy) => api.put(`/purchase-orders/${id}/approve?approvedBy=${encodeURIComponent(approvedBy || 'Admin Sentinel')}`),
+};
+
+// Gate Pass & QR Logistics
+export const gatePassAPI = {
+  getAll: () => api.get('/gate-pass'),
+  issue: (data) => api.post('/gate-pass/issue', data),
+  authorizeExit: (passNumber) => api.put(`/gate-pass/${passNumber}/authorize-exit`),
+};
+
+// Warehouse Zones
+export const zoneAPI = {
+  getAll: () => api.get('/zones'),
+  getByWarehouse: (whId) => api.get(`/zones/warehouse/${whId}`),
+  create: (data) => api.post('/zones', data),
+};
+
+// Reports
+export const reportAPI = {
+  downloadStockAuditCsv: () => api.get('/reports/stock-audit/csv', { responseType: 'blob' }),
+};
+
 // Admin Commands
 export const adminAPI = {
   seed: () => api.get('/admin/seed'),

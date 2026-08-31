@@ -3,11 +3,17 @@ import { useAuth } from '../context/AuthContext';
 import {
   LayoutDashboard, Leaf, Sprout, Warehouse, Users, Truck,
   ShoppingCart, BarChart3, Settings, LogOut, QrCode,
-  TrendingUp, ArrowDownToLine, ChevronRight, FlaskConical, Boxes
+  TrendingUp, ArrowDownToLine, ChevronRight, FlaskConical, Boxes,
+  Radio, Layers, ShoppingBag, Grid, ShieldCheck
 } from 'lucide-react';
 
 const navItems = [
   { to: '/dashboard', icon: LayoutDashboard, label: 'Agri Dashboard' },
+  { to: '/iot-telemetry', icon: Radio, label: 'IoT Silo Telemetry' },
+  { to: '/batch-lots', icon: Layers, label: 'FEFO Batch Lots' },
+  { to: '/purchase-orders', icon: ShoppingBag, label: 'Auto-Reorder (POs)' },
+  { to: '/gate-passes', icon: ShieldCheck, label: 'QR Gate Passes' },
+  { to: '/zones', icon: Grid, label: 'Silo Capacity Map' },
   { to: '/products', icon: Sprout, label: 'Agri-Assets' },
   { to: '/inventory', icon: Boxes, label: 'Stock Sentinel' },
   { to: '/warehouses', icon: Warehouse, label: 'Storage Depots' },
@@ -33,7 +39,7 @@ export default function Sidebar() {
       className="bg-white border-r border-slate-200 flex flex-col fixed left-0 top-0 bottom-0 z-50 shadow-sm">
 
       {/* Logo */}
-      <div className="p-6 border-b border-slate-100 mb-2">
+      <div className="p-5 border-b border-slate-100 mb-1">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl flex items-center justify-center shadow-emerald-100 shadow-lg"
             style={{ background: 'linear-gradient(135deg, #10b981, #059669)' }}>
@@ -47,13 +53,13 @@ export default function Sidebar() {
       </div>
 
       {/* Nav */}
-      <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+      <nav className="flex-1 p-3 space-y-0.5 overflow-y-auto">
         {navItems.map(({ to, icon: Icon, label }) => (
           <NavLink
             key={to}
             to={to}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group ${
+              `flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group ${
                 isActive
                   ? 'sidebar-item-active'
                   : 'text-slate-500 hover:text-emerald-600 hover:bg-emerald-50'
@@ -62,9 +68,9 @@ export default function Sidebar() {
           >
             {({ isActive }) => (
               <>
-                <Icon size={18} className={isActive ? 'text-emerald-600' : 'text-slate-400 group-hover:text-emerald-600'} />
+                <Icon size={17} className={isActive ? 'text-emerald-600' : 'text-slate-400 group-hover:text-emerald-600'} />
                 <span className="flex-1 font-bold tracking-tight text-xs">{label}</span>
-                {isActive && <ChevronRight size={14} className="text-emerald-600" />}
+                {isActive && <ChevronRight size={13} className="text-emerald-600" />}
               </>
             )}
           </NavLink>
@@ -74,7 +80,7 @@ export default function Sidebar() {
           <NavLink
             to="/employees"
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 group ${
+              `flex items-center gap-3 px-3 py-2 rounded-xl text-sm font-medium transition-all duration-200 group ${
                 isActive
                   ? 'sidebar-item-active'
                   : 'text-slate-500 hover:text-emerald-600 hover:bg-emerald-50'
@@ -83,9 +89,9 @@ export default function Sidebar() {
           >
             {({ isActive }) => (
               <>
-                <Users size={18} className={isActive ? 'text-emerald-600' : 'text-slate-400 group-hover:text-emerald-600'} />
+                <Users size={17} className={isActive ? 'text-emerald-600' : 'text-slate-400 group-hover:text-emerald-600'} />
                 <span className="flex-1 font-bold tracking-tight text-xs">Staff Registry</span>
-                {isActive && <ChevronRight size={14} className="text-emerald-600" />}
+                {isActive && <ChevronRight size={13} className="text-emerald-600" />}
               </>
             )}
           </NavLink>
@@ -93,9 +99,9 @@ export default function Sidebar() {
       </nav>
 
       {/* User section */}
-      <div className="p-4 border-t border-slate-100 bg-slate-50/50">
-        <div className="flex items-center gap-3 p-3 rounded-xl bg-white border border-slate-100 mb-3 shadow-sm">
-          <div className="w-8 h-8 rounded-lg flex items-center justify-center font-black text-[10px] text-white shadow-md"
+      <div className="p-3 border-t border-slate-100 bg-slate-50/50">
+        <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white border border-slate-100 mb-2 shadow-sm">
+          <div className="w-7 h-7 rounded-lg flex items-center justify-center font-black text-[10px] text-white shadow-md"
             style={{ background: 'linear-gradient(135deg, #4f46e5, #6366f1)' }}>
             {user?.name?.[0]?.toUpperCase() || 'U'}
           </div>
@@ -105,8 +111,8 @@ export default function Sidebar() {
           </div>
         </div>
         <button onClick={handleLogout}
-          className="w-full flex items-center gap-2 px-3 py-2.5 rounded-xl text-rose-600 hover:bg-rose-50 text-xs font-black uppercase tracking-widest transition-all">
-          <LogOut size={14} />
+          className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-rose-600 hover:bg-rose-50 text-xs font-black uppercase tracking-widest transition-all cursor-pointer">
+          <LogOut size={13} />
           Terminal Exit
         </button>
       </div>

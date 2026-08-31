@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { dashboardAPI, adminAPI } from '../services/api';
+import { useNavigate } from 'react-router-dom';
+import { dashboardAPI, adminAPI, iotAPI, batchAPI, poAPI } from '../services/api';
 import Header from '../components/Header';
 import { LoadingSpinner } from '../components/UIComponents';
-import { Leaf, Warehouse, Truck, ShoppingCart, AlertTriangle, Sprout, TrendingUp, RefreshCcw } from 'lucide-react';
+import { Leaf, Warehouse, Truck, ShoppingCart, AlertTriangle, Sprout, TrendingUp, RefreshCcw, Radio, Layers, ShoppingBag, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
 import toast from 'react-hot-toast';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
@@ -12,14 +13,26 @@ import {
 const COLORS = ['#6366f1', '#f59e0b', '#22c55e', '#ec4899', '#ef4444'];
 
 export default function DashboardPage() {
+  const navigate = useNavigate();
   const [data, setData] = useState(null);
+  const [iotReadings, setIotReadings] = useState([]);
+  const [expiringLots, setExpiringLots] = useState([]);
+  const [purchaseOrders, setPurchaseOrders] = useState([]);
   const [loading, setLoading] = useState(true);
   const [seeding, setSeeding] = useState(false);
 
   const load = async () => {
     try {
-      const res = await dashboardAPI.getSummary();
-      setData(res.data);
+      const [summaryRes, iotRes, batchRes, poRes] = await Promise.all([
+        dashboardAPI.getSummary(),
+        iotAPI.getLatest().catch(() => ({ data: [] })),
+        batchAPI.getExpiringSoon().catch(() => ({ data: [] })),
+        poAPI.getAll().catch(() => ({ data: [] })),
+      ]);
+      setData(summaryRes.data);
+      setIotReadings(iotRes.data || []);
+      setExpiringLots(batchRes.data || []);
+      setPurchaseOrders(poRes.data || []);
     } catch {
       toast.error('Failed to connect to Agri-WMS Sync');
     } finally {
@@ -89,6 +102,126 @@ export default function DashboardPage() {
               <p className="text-slate-900 text-3xl font-black">{card.value}</p>
             </div>
           ))}
+        </div>
+
+        {/* 🌟 Live IoT Silo & FEFO Expiry Pulse Row */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          {/* IoT Quick Telemetry Widget */}
+          <div className="p-6 rounded-[2rem] bg-white border border-slate-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-xl bg-emerald-50 text-emerald-600"><Radio size={18} className="animate-pulse" /></div>
+                  <h3 className="text-sm font-black text-slate-900">Silo IoT Telemetry</h3>
+                </div>
+                <span className="text-[10px] font-extrabold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">LIVE</span>
+              </div>
+              <p className="text-xs text-slate-500 font-medium mb-4">
+                Real-time Paddy/Wheat Grain Moisture & Cold Vault status.
+              </p>
+
+              <div className="space-y-2.5">
+                {iotReadings.slice(0, 2).map((r, i) => (
+                  <div key={i} className="p-3 rounded-xl bg-slate-50 border border-slate-100 flex justify-between items-center text-xs">
+                    <div>
+                      <p className="font-extrabold text-slate-800">{r.zoneName}</p>
+                      <span className="text-[10px] text-slate-400">{r.warehouseName}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="font-black text-slate-900">{r.temperatureCelsius}°C</span>
+                      <p className="text-[10px] text-emerald-600 font-bold">{r.grainMoisturePercentage}% Moist</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigate('/iot-telemetry')}
+              className="mt-4 pt-3 border-t border-slate-100 text-xs font-black text-emerald-600 hover:text-emerald-700 flex items-center justify-between cursor-pointer"
+            >
+              <span>Explore All IoT Nodes</span>
+              <ArrowRight size={14} />
+            </button>
+          </div>
+
+          {/* FEFO Expiry Alert Widget */}
+          <div className="p-6 rounded-[2rem] bg-white border border-slate-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-xl bg-amber-50 text-amber-600"><Layers size={18} /></div>
+                  <h3 className="text-sm font-black text-slate-900">FEFO Expiry Queue</h3>
+                </div>
+                <span className="text-[10px] font-extrabold text-amber-700 bg-amber-50 px-2 py-0.5 rounded-full">
+                  {expiringLots.length} Expiring Soon
+                </span>
+              </div>
+              <p className="text-xs text-slate-500 font-medium mb-4">
+                Lots requiring early harvest dispatch priority.
+              </p>
+
+              <div className="space-y-2.5">
+                {expiringLots.slice(0, 2).map((lot, i) => (
+                  <div key={i} className="p-3 rounded-xl bg-amber-50/50 border border-amber-100 flex justify-between items-center text-xs">
+                    <div>
+                      <p className="font-extrabold text-slate-900">{lot.productName}</p>
+                      <span className="text-[10px] font-mono text-amber-700">{lot.batchNumber}</span>
+                    </div>
+                    <div className="text-right">
+                      <span className="font-black text-rose-600">{lot.daysToExpiry}d Left</span>
+                      <p className="text-[10px] text-slate-500 font-bold">{lot.remainingQuantity} Bags</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigate('/batch-lots')}
+              className="mt-4 pt-3 border-t border-slate-100 text-xs font-black text-amber-600 hover:text-amber-700 flex items-center justify-between cursor-pointer"
+            >
+              <span>FEFO Picking Optimizer</span>
+              <ArrowRight size={14} />
+            </button>
+          </div>
+
+          {/* Automated Reordering PO Widget */}
+          <div className="p-6 rounded-[2rem] bg-white border border-slate-100 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-xl bg-blue-50 text-blue-600"><ShoppingBag size={18} /></div>
+                  <h3 className="text-sm font-black text-slate-900">Auto PO Replenishment</h3>
+                </div>
+                <span className="text-[10px] font-extrabold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">AI SENTINEL</span>
+              </div>
+              <p className="text-xs text-slate-500 font-medium mb-4">
+                Automated stock deficit proposals ready for approval.
+              </p>
+
+              <div className="p-3 rounded-xl bg-slate-50 border border-slate-100 text-xs space-y-1">
+                <div className="flex justify-between font-bold text-slate-800">
+                  <span>Pending Auto-POs:</span>
+                  <span className="text-blue-600">{purchaseOrders.filter(p => p.status === 'AUTO_SUGGESTED').length} Orders</span>
+                </div>
+                <div className="flex justify-between text-[11px] text-slate-500">
+                  <span>En Route Deliveries:</span>
+                  <span className="text-emerald-600 font-bold">{purchaseOrders.filter(p => p.status === 'APPROVED').length} Dispatched</span>
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={() => navigate('/purchase-orders')}
+              className="mt-4 pt-3 border-t border-slate-100 text-xs font-black text-blue-600 hover:text-blue-700 flex items-center justify-between cursor-pointer"
+            >
+              <span>Manage Purchase Orders</span>
+              <ArrowRight size={14} />
+            </button>
+          </div>
+
         </div>
 
         {/* Main Charts */}
