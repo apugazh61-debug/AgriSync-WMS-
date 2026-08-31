@@ -25,11 +25,6 @@ export default function LoginPage() {
     }
   };
 
-  const handleQuickFill = (email, password) => {
-    setForm({ email, password });
-    toast.success('Demo credentials applied!', { icon: '✨', duration: 1500 });
-  };
-
   return (
     <div 
       className="h-screen w-full flex items-center justify-center relative overflow-hidden px-4 py-2 select-none"
@@ -163,18 +158,6 @@ export default function LoginPage() {
               {loading ? 'CALCULATING ACCESS...' : 'INITIALIZE AGRI-PORTAL'}
             </span>
           </button>
-
-          {/* ⚡ Quick Fill Demo Badge */}
-          <div className="pt-1">
-            <button
-              type="button"
-              onClick={() => handleQuickFill('admin@wms.com', 'password123')}
-              className="w-full py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/30 text-[11px] font-bold text-white transition-all text-center shadow-md hover:scale-[1.01] active:scale-95 backdrop-blur-md drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)] flex items-center justify-center gap-1.5"
-            >
-              <Sparkles size={13} className="text-emerald-300" />
-              <span>Quick Demo Access: <strong>admin@wms.com</strong></span>
-            </button>
-          </div>
 
           {/* Footer Branding */}
           <div className="pt-2 border-t border-white/20 text-center">
