@@ -1,7 +1,9 @@
 package com.warehouse.wms.service;
 
 import com.warehouse.wms.dto.ProductDto;
+import com.warehouse.wms.model.BatchLot;
 import com.warehouse.wms.model.Product;
+import com.warehouse.wms.repository.BatchLotRepository;
 import com.warehouse.wms.repository.ProductRepository;
 import com.warehouse.wms.repository.SupplierRepository;
 import com.warehouse.wms.util.BarcodeQrUtil;
@@ -17,9 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -30,6 +30,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
     private final SupplierRepository supplierRepository;
+    private final BatchLotRepository batchLotRepository;
     private final BarcodeQrUtil barcodeQrUtil;
 
     @CacheEvict(value = "products", allEntries = true)
@@ -52,23 +53,72 @@ public class ProductService {
         return toDto(saved);
     }
 
-    @Cacheable(value = "products", key = "'all'")
     public List<ProductDto> getAllProducts() {
         return productRepository.findAll().stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
     }
 
-    @Cacheable(value = "products", key = "#id")
     public ProductDto getProductById(String id) {
         Product p = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
         return toDto(p);
     }
 
-    public List<ProductDto> searchProducts(String query) {
-        return productRepository.findByNameContainingIgnoreCaseOrCategoryContainingIgnoreCase(query, query)
-                .stream().map(this::toDto).collect(Collectors.toList());
+    /**
+     * Universal Scanner & Search Engine
+     * Searches by Barcode, QR Code payload, Batch Lot sticker number, Product ID, Name, and Category.
+     */
+    public List<ProductDto> searchProducts(String rawQuery) {
+        if (rawQuery == null || rawQuery.trim().isEmpty()) {
+            return Collections.emptyList();
+        }
+
+        String cleaned = rawQuery.trim();
+        if (cleaned.startsWith("PRODUCT:")) {
+            cleaned = cleaned.replace("PRODUCT:", "").trim();
+        }
+        final String cleanQuery = cleaned;
+
+        Map<String, ProductDto> resultMap = new LinkedHashMap<>();
+
+        // 1. Search by Barcode
+        List<Product> byBarcode = productRepository.findByBarcodeContainingIgnoreCase(cleanQuery);
+        for (Product p : byBarcode) {
+            resultMap.put(p.getProductId(), toDto(p));
+        }
+
+        // 2. Search by Product ID
+        Optional<Product> byId = productRepository.findById(cleanQuery);
+        byId.ifPresent(p -> resultMap.put(p.getProductId(), toDto(p)));
+
+        // 3. Search by Batch Lot Sticker Number (e.g. LOT-2026-P100-L1)
+        List<BatchLot> batches = batchLotRepository.findAll().stream()
+                .filter(b -> b.getBatchNumber() != null && b.getBatchNumber().equalsIgnoreCase(cleanQuery))
+                .toList();
+
+        for (BatchLot batch : batches) {
+            Product p = productRepository.findById(batch.getProductId()).orElse(null);
+            if (p != null) {
+                ProductDto dto = toDto(p);
+                dto.setScannedBatchNumber(batch.getBatchNumber());
+                dto.setScannedExpiryDate(batch.getExpiryDate());
+                dto.setScannedDaysToExpiry(batch.getDaysToExpiry());
+                dto.setScannedBinLocation(batch.getStorageBinLocation());
+                dto.setScannedQualityGrade(batch.getQualityGrade() != null ? batch.getQualityGrade().name() : "STANDARD");
+                dto.setScannedRemainingQuantity(batch.getRemainingQuantity());
+                dto.setScannedWarehouseName(batch.getWarehouseName());
+                resultMap.put(p.getProductId() + "_" + batch.getBatchNumber(), dto);
+            }
+        }
+
+        // 4. Search by Name or Category
+        List<Product> byNameOrCat = productRepository.findByNameContainingIgnoreCaseOrCategoryContainingIgnoreCase(cleanQuery, cleanQuery);
+        for (Product p : byNameOrCat) {
+            resultMap.putIfAbsent(p.getProductId(), toDto(p));
+        }
+
+        return new ArrayList<>(resultMap.values());
     }
 
     @CacheEvict(value = "products", allEntries = true)

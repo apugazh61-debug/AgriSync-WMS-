@@ -9,6 +9,7 @@ import java.util.List;
 @Repository
 public interface ProductRepository extends MongoRepository<Product, String> {
     List<Product> findByNameContainingIgnoreCaseOrCategoryContainingIgnoreCase(String name, String category);
+    List<Product> findByBarcodeContainingIgnoreCase(String barcode);
     List<Product> findBySupplierId(String supplierId);
     boolean existsByBarcode(String barcode);
 }
