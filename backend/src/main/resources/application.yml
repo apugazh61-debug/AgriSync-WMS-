@@ -2,7 +2,7 @@ de.flapdoodle.mongodb.embedded.version: 4.4.18
 
 spring:
   application:
-    name: warehouse-management-system
+    name: agrisync-wms-enterprise-backend
 
   data:
     mongodb:
