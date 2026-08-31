@@ -1,7 +1,11 @@
 package com.warehouse.wms.service;
 
 import com.warehouse.wms.model.BatchLot;
+import com.warehouse.wms.model.Inventory;
+import com.warehouse.wms.model.StockMovement;
 import com.warehouse.wms.repository.BatchLotRepository;
+import com.warehouse.wms.repository.InventoryRepository;
+import com.warehouse.wms.repository.StockMovementRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -9,20 +13,20 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
 public class BatchExpiryService {
 
     private final BatchLotRepository batchLotRepository;
+    private final InventoryRepository inventoryRepository;
+    private final StockMovementRepository stockMovementRepository;
 
     /**
-     * Nightly / Hourly recalculation of batch shelf life and expiration status
+     * Recalculates shelf life, remaining days, and status for all active batches.
      */
-    @Scheduled(fixedRate = 3600000) // Every 1 hour
+    @Scheduled(fixedRate = 3600000)
     public void updateBatchShelfLifeStatus() {
         List<BatchLot> batches = batchLotRepository.findAll();
         LocalDate today = LocalDate.now();
@@ -53,8 +57,8 @@ public class BatchExpiryService {
         return batchLotRepository.findAll();
     }
 
-    public Optional<BatchLot> getBatchByNumber(String batchNumber) {
-        return batchLotRepository.findByBatchNumber(batchNumber);
+    public List<BatchLot> getBatchesByProduct(String productId) {
+        return batchLotRepository.findByProductIdOrderByExpiryDateAsc(productId);
     }
 
     public List<BatchLot> getExpiringSoonBatches() {
@@ -63,14 +67,15 @@ public class BatchExpiryService {
     }
 
     /**
-     * FEFO (First-Expired, First-Out) Algorithm for Outbound Order Fulfillment
-     * Picks batches with the earliest expiry date first to prevent grain / seed decay.
+     * FEFO (First-Expired, First-Out) Algorithm
+     * Evaluates and returns optimal picking order prioritising earliest expiry dates.
      */
     public List<BatchLotAllocation> allocateBatchesFEFO(String productId, int requestedQuantity) {
         List<BatchLot> availableBatches = batchLotRepository.findByProductIdOrderByExpiryDateAsc(productId);
         List<BatchLotAllocation> allocations = new ArrayList<>();
 
         int remainingToAllocate = requestedQuantity;
+        int pickOrder = 1;
 
         for (BatchLot batch : availableBatches) {
             if (batch.getRemainingQuantity() <= 0 || batch.getExpiryStatus() == BatchLot.ExpiryStatus.EXPIRED) {
@@ -79,12 +84,16 @@ public class BatchExpiryService {
 
             int allocateFromThis = Math.min(batch.getRemainingQuantity(), remainingToAllocate);
             allocations.add(new BatchLotAllocation(
+                    batch.getId(),
                     batch.getBatchNumber(),
                     batch.getProductName(),
                     batch.getStorageBinLocation(),
+                    batch.getWarehouseName(),
                     batch.getExpiryDate(),
                     batch.getDaysToExpiry(),
-                    allocateFromThis
+                    batch.getRemainingQuantity(),
+                    allocateFromThis,
+                    pickOrder++
             ));
 
             remainingToAllocate -= allocateFromThis;
@@ -92,6 +101,60 @@ public class BatchExpiryService {
         }
 
         return allocations;
+    }
+
+    /**
+     * Execute FEFO Outbound Dispatch:
+     * Deducts the allocated quantities from the corresponding batch lots and inventory,
+     * and logs stock movement records.
+     */
+    public FefoDispatchResult executeFefoDispatch(String productId, int quantity, String destination) {
+        List<BatchLotAllocation> plan = allocateBatchesFEFO(productId, quantity);
+        if (plan.isEmpty()) {
+            throw new RuntimeException("No available unexpired lots found for product");
+        }
+
+        int totalDispatched = 0;
+        List<String> affectedLots = new ArrayList<>();
+
+        for (BatchLotAllocation alloc : plan) {
+            BatchLot lot = batchLotRepository.findById(alloc.batchId())
+                    .orElse(null);
+            if (lot != null) {
+                lot.setRemainingQuantity(Math.max(0, lot.getRemainingQuantity() - alloc.allocatedQuantity()));
+                lot.setLastUpdated(LocalDateTime.now());
+                batchLotRepository.save(lot);
+                affectedLots.add(lot.getBatchNumber() + " (" + alloc.allocatedQuantity() + " Units)");
+                totalDispatched += alloc.allocatedQuantity();
+
+                // Update Warehouse Inventory
+                Inventory inv = inventoryRepository.findByProductIdAndWarehouseId(productId, lot.getWarehouseId())
+                        .orElse(null);
+                if (inv != null) {
+                    inv.setStockQuantity(Math.max(0, inv.getStockQuantity() - alloc.allocatedQuantity()));
+                    inv.setLastUpdated(LocalDateTime.now());
+                    inventoryRepository.save(inv);
+                }
+
+                // Log Stock Movement
+                StockMovement movement = StockMovement.builder()
+                        .movementId(UUID.randomUUID().toString())
+                        .productId(productId)
+                        .warehouseId(lot.getWarehouseId())
+                        .type(StockMovement.MovementType.OUTBOUND)
+                        .quantity(alloc.allocatedQuantity())
+                        .timestamp(LocalDateTime.now())
+                        .build();
+                stockMovementRepository.save(movement);
+            }
+        }
+
+        return new FefoDispatchResult(
+                true,
+                "FEFO Dispatch successfully executed: " + totalDispatched + " units allocated across " + plan.size() + " batch lot(s).",
+                totalDispatched,
+                affectedLots
+        );
     }
 
     public BatchLot createBatch(BatchLot lot) {
@@ -102,18 +165,35 @@ public class BatchExpiryService {
         if (lot.getExpiryDate() != null) {
             int days = (int) ChronoUnit.DAYS.between(LocalDate.now(), lot.getExpiryDate());
             lot.setDaysToExpiry(days);
-            lot.setExpiryStatus(days <= 15 ? BatchLot.ExpiryStatus.CRITICAL : 
-                               days <= 45 ? BatchLot.ExpiryStatus.EXPIRING_SOON : BatchLot.ExpiryStatus.FRESH);
+            lot.setExpiryStatus(days <= 0 ? BatchLot.ExpiryStatus.EXPIRED :
+                               days <= 15 ? BatchLot.ExpiryStatus.CRITICAL : 
+                               days <= 45 ? BatchLot.ExpiryStatus.EXPIRING_SOON : 
+                               days <= 120 ? BatchLot.ExpiryStatus.MATURING : BatchLot.ExpiryStatus.FRESH);
         }
         return batchLotRepository.save(lot);
     }
 
+    public void deleteBatch(String id) {
+        batchLotRepository.deleteById(id);
+    }
+
     public record BatchLotAllocation(
+            String batchId,
             String batchNumber,
             String productName,
             String binLocation,
+            String warehouseName,
             LocalDate expiryDate,
             int daysToExpiry,
-            int allocatedQuantity
+            int currentStock,
+            int allocatedQuantity,
+            int pickPriorityOrder
+    ) {}
+
+    public record FefoDispatchResult(
+            boolean success,
+            String message,
+            int totalDispatched,
+            List<String> affectedLots
     ) {}
 }

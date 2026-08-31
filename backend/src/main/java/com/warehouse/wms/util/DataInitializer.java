@@ -147,50 +147,66 @@ public class DataInitializer implements CommandLineRunner {
             }
         }
 
-        // 5. Populate Inventory & Agricultural FEFO Batch Lots
+        // 5. Populate Inventory & Agricultural FEFO Batch Lots (Multiple Lots per Product)
         for (int pIdx = 0; pIdx < products.size(); pIdx++) {
             Product p = products.get(pIdx);
             Warehouse wh = warehouses.get(random.nextInt(warehouses.size()));
             
-            int stockQty = 50 + random.nextInt(1200);
-            int reorderLevel = 100 + random.nextInt(150);
+            // Generate 2 to 3 distinct batches for each product
+            int totalProductStock = 0;
+            int numLots = 2 + (pIdx % 2); // 2 or 3 lots per product
+
+            for (int lIdx = 1; lIdx <= numLots; lIdx++) {
+                int lotQty = 80 + random.nextInt(250);
+                totalProductStock += lotQty;
+
+                LocalDate harvest = LocalDate.now().minusMonths(lIdx * 2);
+                LocalDate expiry;
+                
+                if (lIdx == 1 && pIdx % 3 == 0) {
+                    expiry = LocalDate.now().plusDays(10 + random.nextInt(20)); // Critical / Expiring soon
+                } else if (lIdx == 1) {
+                    expiry = LocalDate.now().plusDays(35 + random.nextInt(30)); // Maturing
+                } else {
+                    expiry = LocalDate.now().plusMonths(4 + (lIdx * 3)); // Fresh
+                }
+
+                int daysLeft = (int) java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(), expiry);
+                BatchLot.ExpiryStatus status = daysLeft <= 15 ? BatchLot.ExpiryStatus.CRITICAL :
+                                              daysLeft <= 45 ? BatchLot.ExpiryStatus.EXPIRING_SOON :
+                                              daysLeft <= 120 ? BatchLot.ExpiryStatus.MATURING : BatchLot.ExpiryStatus.FRESH;
+
+                BatchLot lot = BatchLot.builder()
+                        .batchNumber("LOT-" + LocalDate.now().getYear() + "-P" + (100 + pIdx) + "-L" + lIdx)
+                        .productId(p.getProductId())
+                        .productName(p.getName())
+                        .warehouseId(wh.getWarehouseId())
+                        .warehouseName(wh.getName())
+                        .initialQuantity(lotQty + 50)
+                        .remainingQuantity(lotQty)
+                        .unit("BAGS")
+                        .harvestDate(harvest)
+                        .receivedDate(harvest.plusWeeks(2))
+                        .expiryDate(expiry)
+                        .qualityGrade(lIdx == 1 ? BatchLot.QualityGrade.SEED_CERTIFIED_EXPORT : BatchLot.QualityGrade.GRADE_A_PREMIUM)
+                        .moistureAtIntake(12.0 + (random.nextDouble() * 2.2))
+                        .storageBinLocation("SILO-A" + (1 + random.nextInt(3)) + " / BIN-" + (10 + random.nextInt(50)))
+                        .expiryStatus(status)
+                        .daysToExpiry(daysLeft)
+                        .createdAt(LocalDateTime.now().minusDays(20))
+                        .lastUpdated(LocalDateTime.now())
+                        .build();
+                batchLotRepository.save(lot);
+            }
 
             Inventory inventory = Inventory.builder()
                     .productId(p.getProductId())
                     .warehouseId(wh.getWarehouseId())
-                    .stockQuantity(stockQty)
-                    .reorderLevel(reorderLevel)
+                    .stockQuantity(totalProductStock)
+                    .reorderLevel(100 + random.nextInt(150))
                     .lastUpdated(LocalDateTime.now().minusMinutes(random.nextInt(10000)))
                     .build();
             inventoryRepository.save(inventory);
-
-            // Create FEFO Batch Lot
-            LocalDate harvest = LocalDate.now().minusMonths(1 + random.nextInt(6));
-            LocalDate expiry = (pIdx % 5 == 0) 
-                    ? LocalDate.now().plusDays(10 + random.nextInt(25)) // Expiring Soon Lot
-                    : LocalDate.now().plusMonths(4 + random.nextInt(14)); // Fresh Lot
-
-            BatchLot lot = BatchLot.builder()
-                    .batchNumber("LOT-2026-" + (pIdx < 10 ? "0" + pIdx : pIdx) + "-" + p.getName().substring(0, Math.min(4, p.getName().length())).toUpperCase())
-                    .productId(p.getProductId())
-                    .productName(p.getName())
-                    .warehouseId(wh.getWarehouseId())
-                    .warehouseName(wh.getName())
-                    .initialQuantity(stockQty + 200)
-                    .remainingQuantity(stockQty)
-                    .unit("BAGS")
-                    .harvestDate(harvest)
-                    .receivedDate(harvest.plusWeeks(2))
-                    .expiryDate(expiry)
-                    .qualityGrade(pIdx % 3 == 0 ? BatchLot.QualityGrade.SEED_CERTIFIED_EXPORT : BatchLot.QualityGrade.GRADE_A_PREMIUM)
-                    .moistureAtIntake(11.8 + (random.nextDouble() * 2.5))
-                    .storageBinLocation("SILO-A" + (1 + random.nextInt(3)) + " / BIN-" + (10 + random.nextInt(50)))
-                    .expiryStatus(expiry.isBefore(LocalDate.now().plusDays(45)) ? BatchLot.ExpiryStatus.EXPIRING_SOON : BatchLot.ExpiryStatus.FRESH)
-                    .daysToExpiry((int) java.time.temporal.ChronoUnit.DAYS.between(LocalDate.now(), expiry))
-                    .createdAt(LocalDateTime.now().minusDays(30))
-                    .lastUpdated(LocalDateTime.now())
-                    .build();
-            batchLotRepository.save(lot);
         }
 
         // 6. Build Sample Purchase Orders (Auto-Replenishment)

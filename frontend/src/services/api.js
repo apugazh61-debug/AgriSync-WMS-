@@ -128,9 +128,12 @@ export const iotAPI = {
 // Batch & FEFO Expiry
 export const batchAPI = {
   getAll: () => api.get('/batches'),
+  getByProduct: (productId) => api.get(`/batches/product/${productId}`),
   getExpiringSoon: () => api.get('/batches/expiring-soon'),
   getFefoAllocation: (productId, qty = 100) => api.get(`/batches/fefo-allocation?productId=${productId}&quantity=${qty}`),
+  executeFefoDispatch: (data) => api.post('/batches/fefo-dispatch', data),
   create: (data) => api.post('/batches', data),
+  delete: (id) => api.delete(`/batches/${id}`),
 };
 
 // Purchase Orders (Auto-Replenishment)
