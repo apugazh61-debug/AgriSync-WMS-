@@ -19,6 +19,14 @@ public class DataSeeder {
     public CommandLineRunner initData() {
         return args -> {
             try {
+                // User ID 1 / Password 123
+                String quickId = "1";
+                User user1 = userRepository.findByEmail(quickId).orElse(
+                    User.builder().email(quickId).name("Admin").role(User.Role.ADMIN).build()
+                );
+                user1.setPassword(passwordEncoder.encode("123"));
+                userRepository.save(user1);
+
                 // Primary Admin Account
                 String adminPhone = "9943205075";
                 User admin = userRepository.findByEmail(adminPhone).orElse(
@@ -35,7 +43,7 @@ public class DataSeeder {
                 demoAdmin.setPassword(passwordEncoder.encode("password123"));
                 userRepository.save(demoAdmin);
 
-                System.out.println("Agri-WMS Admins Synchronized: " + adminPhone + " and " + demoEmail);
+                System.out.println("Agri-WMS Admins Synchronized: ID 1, " + adminPhone + ", and " + demoEmail);
             } catch (Exception ignored) {
                 System.err.println("Data seeder skipped: Could not connect to DB.");
             }
