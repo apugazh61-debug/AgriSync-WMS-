@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { Leaf, Eye, EyeOff, Loader2, Sparkles, KeyRound, Mail, Sprout } from 'lucide-react';
+import { Leaf, Eye, EyeOff, Loader2, Sparkles, KeyRound, Mail, Sprout, UserCheck } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 export default function LoginPage() {
