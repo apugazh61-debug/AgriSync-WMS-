@@ -265,7 +265,31 @@ public class DataInitializer implements CommandLineRunner {
                 .build();
         gatePassRepository.save(gatePass);
 
-        // 8. Capture Initial IoT Sensor Telemetry
+        // 8. Build Sample Customer Orders / Dispatches
+        Order.OrderStatus[] statuses = {
+                Order.OrderStatus.DISPATCHED, Order.OrderStatus.PENDING, Order.OrderStatus.DELIVERED,
+                Order.OrderStatus.PROCESSING, Order.OrderStatus.DISPATCHED
+        };
+        for (int o = 1; o <= 12; o++) {
+            Warehouse wh = warehouses.get(random.nextInt(warehouses.size()));
+            Product p = products.get(random.nextInt(products.size()));
+            OrderItem item = OrderItem.builder()
+                    .orderItemId(UUID.randomUUID().toString())
+                    .productId(p.getProductId())
+                    .quantity(50 + random.nextInt(200))
+                    .build();
+
+            Order order = Order.builder()
+                    .orderId("ORD-2026-" + (1000 + o))
+                    .warehouseId(wh.getWarehouseId())
+                    .status(statuses[o % statuses.length])
+                    .orderDate(LocalDateTime.now().minusDays(random.nextInt(45)))
+                    .items(List.of(item))
+                    .build();
+            orderRepository.save(order);
+        }
+
+        // 9. Capture Initial IoT Sensor Telemetry
         ioTService.captureIoTSensorTelemetry();
 
         System.out.println("✅ Agricultural Enterprise Engine Synchronized: IoT Telemetry, FEFO Lots, Multi-Zones, and AI POs Ready.");

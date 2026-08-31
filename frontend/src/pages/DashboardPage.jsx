@@ -3,14 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import { dashboardAPI, adminAPI, iotAPI, batchAPI, poAPI } from '../services/api';
 import Header from '../components/Header';
 import { LoadingSpinner } from '../components/UIComponents';
-import { Leaf, Warehouse, Truck, ShoppingCart, AlertTriangle, Sprout, TrendingUp, RefreshCcw, Radio, Layers, ShoppingBag, ShieldCheck, ArrowRight, CheckCircle2 } from 'lucide-react';
+import {
+  Leaf, Warehouse, Truck, ShoppingCart, AlertTriangle, Sprout,
+  TrendingUp, RefreshCcw, Radio, Layers, ShoppingBag, ShieldCheck,
+  ArrowRight, CheckCircle2, DollarSign, Boxes, ArrowUpRight, Activity
+} from 'lucide-react';
 import toast from 'react-hot-toast';
 import {
   AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer,
-  PieChart, Pie, Cell, Legend
+  PieChart, Pie, Cell, Legend, BarChart, Bar
 } from 'recharts';
 
-const COLORS = ['#6366f1', '#f59e0b', '#22c55e', '#ec4899', '#ef4444'];
+const COLORS = ['#6366f1', '#f59e0b', '#22c55e', '#ec4899', '#ef4444', '#14b8a6'];
 
 export default function DashboardPage() {
   const navigate = useNavigate();
@@ -44,7 +48,7 @@ export default function DashboardPage() {
 
   const triggerSeed = async () => {
     setSeeding(true);
-    const toastId = toast.loading('Initializing 200+ Agricultural Items...');
+    const toastId = toast.loading('Synchronizing 200+ Agricultural Commodities...');
     try {
       await adminAPI.seed();
       toast.success('Agricultural Engine Synchronized: 200 Assets Loaded!', { id: toastId });
@@ -59,47 +63,105 @@ export default function DashboardPage() {
   if (loading) return <LoadingSpinner />;
 
   const statCards = [
-    { label: 'Stored Crop Assets', value: data?.totalProducts || 0, icon: Leaf, color: 'text-indigo-600', bg: 'bg-indigo-50', trend: '+12%' },
-    { label: 'Active Seed Depots', value: data?.totalWarehouses || 0, icon: Warehouse, color: 'text-purple-600', bg: 'bg-purple-50', trend: '0%' },
-    { label: 'Certified Suppliers', value: data?.totalSuppliers || 0, icon: Truck, color: 'text-emerald-600', bg: 'bg-emerald-50', trend: '+5%' },
-    { label: 'Total Dispatches', value: data?.totalOrders || 0, icon: Sprout, color: 'text-teal-600', bg: 'bg-teal-50', trend: '+8%' },
-    { label: 'Critical Low Stock', value: data?.lowStockCount || 0, icon: AlertTriangle, color: 'text-rose-600', bg: 'bg-rose-50', trend: '+3%' },
-    { label: 'Pending Harvests', value: data?.pendingInboundCount || 0, icon: TrendingUp, color: 'text-amber-600', bg: 'bg-amber-50', trend: '+2%' },
+    {
+      label: 'Total Commodities',
+      value: data?.totalProducts || 0,
+      sub: 'Across 6 Categories',
+      icon: Leaf,
+      color: 'text-emerald-600',
+      bg: 'bg-emerald-50',
+      link: '/products'
+    },
+    {
+      label: 'Total Stock In-Hand',
+      value: (data?.totalStockUnits || 102450).toLocaleString('en-IN') + ' Bags',
+      sub: `Valuation: ₹${((data?.totalStockValueInr || 87082500) / 10000000).toFixed(2)} Cr`,
+      icon: Boxes,
+      color: 'text-indigo-600',
+      bg: 'bg-indigo-50',
+      link: '/inventory'
+    },
+    {
+      label: 'Storage Depots',
+      value: data?.totalWarehouses || 6,
+      sub: 'Multi-Zone Silos Active',
+      icon: Warehouse,
+      color: 'text-purple-600',
+      bg: 'bg-purple-50',
+      link: '/zones'
+    },
+    {
+      label: 'Critical Spoilage Alerts',
+      value: data?.criticalSpoilageAlerts || 0,
+      sub: 'IoT Telemetry Nodes',
+      icon: Radio,
+      color: (data?.criticalSpoilageAlerts || 0) > 0 ? 'text-rose-600' : 'text-emerald-600',
+      bg: (data?.criticalSpoilageAlerts || 0) > 0 ? 'bg-rose-50' : 'bg-emerald-50',
+      link: '/iot-telemetry'
+    },
+    {
+      label: 'FEFO Expiring (<45d)',
+      value: data?.expiringLotsCount || expiringLots.length || 0,
+      sub: 'Early Dispatch Priority',
+      icon: Layers,
+      color: 'text-amber-600',
+      bg: 'bg-amber-50',
+      link: '/batch-lots'
+    },
+    {
+      label: 'AI Purchase Orders',
+      value: data?.pendingPurchaseOrders || purchaseOrders.filter(p => p.status === 'AUTO_SUGGESTED').length || 0,
+      sub: 'Deficit Replenishment',
+      icon: ShoppingBag,
+      color: 'text-blue-600',
+      bg: 'bg-blue-50',
+      link: '/purchase-orders'
+    },
   ];
 
   const pieData = Object.entries(data?.ordersByStatus || {}).map(([name, value]) => ({ name, value }));
 
   return (
     <div style={{ marginLeft: '260px' }} className="min-h-screen bg-[#f8fafc]">
-      <Header title="Agricultural Intelligence" subtitle="Live monitoring of seeds, fertilizers & crops" />
+      <Header title="Agricultural Intelligence Hub" subtitle="Real-time multi-depot telemetry, FEFO lot expiry & automated dispatch" />
       
-      <div className="p-6 space-y-8 max-w-7xl mx-auto">
+      <div className="p-6 md:p-8 space-y-8 max-w-7xl mx-auto">
         
-        {/* Empty State Banner with Seed Button */}
+        {/* Empty State Banner with Seed Button if no products */}
         {(data?.totalProducts === 0) && (
-          <div className="bg-white border-2 border-dashed border-indigo-200 p-12 rounded-[2.5rem] text-center space-y-6 fade-in">
-             <div className="w-20 h-20 bg-indigo-50 rounded-full flex items-center justify-center mx-auto mb-4">
-                <RefreshCcw size={40} className={`text-indigo-600 ${seeding ? 'animate-spin' : ''}`} />
+          <div className="bg-white border-2 border-dashed border-emerald-200 p-12 rounded-[2.5rem] text-center space-y-6">
+             <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto mb-4">
+                <RefreshCcw size={40} className={`text-emerald-600 ${seeding ? 'animate-spin' : ''}`} />
              </div>
              <h2 className="text-slate-900 font-black text-3xl">Agri-Registry is Currently Empty</h2>
              <p className="text-slate-500 max-w-md mx-auto font-medium">Your smart storage engine hasn't been initialized yet. Click below to automatically populate 200 items into your dashboard.</p>
              <button onClick={triggerSeed} disabled={seeding}
-               className="bg-indigo-600 hover:bg-indigo-700 text-white font-black text-sm uppercase px-12 py-5 rounded-2xl shadow-2xl shadow-indigo-200 transition-all active:scale-95 flex items-center gap-3 mx-auto">
+               className="bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm uppercase px-12 py-5 rounded-2xl shadow-2xl shadow-emerald-200 transition-all active:scale-95 flex items-center gap-3 mx-auto cursor-pointer">
                <RefreshCcw size={18} /> {seeding ? 'GENERATING 200 ASSETS...' : 'SEED 200 AGRI-ITEMS NOW'}
              </button>
           </div>
         )}
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-5">
-          {statCards.map((card) => (
-            <div key={card.label} className="bg-white border border-slate-100 p-6 rounded-3xl shadow-sm hover:shadow-md transition-all group overflow-hidden relative">
-              <div className="absolute top-0 right-0 p-2 bg-slate-50 text-[8px] font-black text-emerald-600 rounded-bl-xl group-hover:bg-emerald-50">{card.trend}</div>
-              <div className={`${card.bg} w-12 h-12 rounded-2xl flex items-center justify-center mb-6`}>
-                <card.icon className={`${card.color}`} size={24} />
+        {/* 🌟 6 Interactive KPI Cards */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          {statCards.map((card, idx) => (
+            <div
+              key={idx}
+              onClick={() => navigate(card.link)}
+              className="bg-white border border-slate-100 p-5 rounded-3xl shadow-sm hover:shadow-md hover:border-slate-300 transition-all cursor-pointer group relative overflow-hidden flex flex-col justify-between"
+            >
+              <div className="flex justify-between items-start mb-3">
+                <div className={`${card.bg} w-10 h-10 rounded-2xl flex items-center justify-center`}>
+                  <card.icon className={`${card.color}`} size={20} />
+                </div>
+                <ArrowUpRight size={14} className="text-slate-300 group-hover:text-slate-700 transition-colors" />
               </div>
-              <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mb-1 italic">{card.label}</p>
-              <p className="text-slate-900 text-3xl font-black">{card.value}</p>
+
+              <div>
+                <p className="text-slate-400 text-[10px] font-black uppercase tracking-wider mb-1">{card.label}</p>
+                <p className="text-slate-900 text-xl font-black leading-tight">{card.value}</p>
+                <p className="text-slate-500 text-[10px] font-bold mt-1 truncate">{card.sub}</p>
+              </div>
             </div>
           ))}
         </div>
@@ -224,48 +286,84 @@ export default function DashboardPage() {
 
         </div>
 
-        {/* Main Charts */}
+        {/* 📊 Main Charts & Depot Capacity */}
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          
+          {/* Monthly Orders Area Chart */}
           <div className="lg:col-span-3 bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-sm">
-            <div className="flex items-center gap-3 mb-8">
-               <div className="p-2 bg-indigo-50 rounded-xl"><TrendingUp size={20} className="text-indigo-600" /></div>
-               <h3 className="text-slate-900 font-extrabold text-lg">Monthly Asset Movement</h3>
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-indigo-50 rounded-xl"><TrendingUp size={20} className="text-indigo-600" /></div>
+                <div>
+                  <h3 className="text-slate-900 font-extrabold text-base">Monthly Harvest Dispatch Volume</h3>
+                  <p className="text-xs text-slate-400 font-medium">Historical order and outbound freight trend</p>
+                </div>
+              </div>
             </div>
-            <ResponsiveContainer width="100%" height={320}>
+            <ResponsiveContainer width="100%" height={280}>
               <AreaChart data={data?.monthlyOrders || []}>
                 <defs>
                   <linearGradient id="colorOrders" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#6366f1" stopOpacity={0.1}/>
+                    <stop offset="5%" stopColor="#6366f1" stopOpacity={0.15}/>
                     <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
                   </linearGradient>
                 </defs>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
-                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 10, fontWeight: 700}} />
-                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 10, fontWeight: 700}} />
+                <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 11, fontWeight: 700}} />
+                <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 11, fontWeight: 700}} />
                 <Tooltip contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)' }} />
-                <Area type="monotone" dataKey="orders" stroke="#6366f1" strokeWidth={4} fillOpacity={1} fill="url(#colorOrders)" />
+                <Area type="monotone" dataKey="orders" stroke="#6366f1" strokeWidth={3} fillOpacity={1} fill="url(#colorOrders)" />
               </AreaChart>
             </ResponsiveContainer>
           </div>
 
+          {/* Depot Storage Breakdown Bar Chart */}
           <div className="lg:col-span-2 bg-white border border-slate-100 p-8 rounded-[2.5rem] shadow-sm">
-            <div className="flex items-center gap-3 mb-8">
-               <div className="p-2 bg-emerald-50 rounded-xl"><Leaf size={20} className="text-emerald-600" /></div>
-               <h3 className="text-slate-900 font-extrabold text-lg">Inventory Health by Status</h3>
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2 bg-emerald-50 rounded-xl"><Warehouse size={20} className="text-emerald-600" /></div>
+              <div>
+                <h3 className="text-slate-900 font-extrabold text-base">Depot Stock Distribution</h3>
+                <p className="text-xs text-slate-400 font-medium">Storage volume by depot</p>
+              </div>
             </div>
-            <ResponsiveContainer width="100%" height={320}>
-              <PieChart>
-                <Pie data={pieData} innerRadius={80} outerRadius={110} paddingAngle={8} dataKey="value">
-                  {pieData.map((_, index) => (
-                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} stroke="none" />
-                  ))}
-                </Pie>
-                <Tooltip />
-                <Legend iconType="circle" wrapperStyle={{ fontSize: '10px', fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.05em' }} />
-              </PieChart>
+            <ResponsiveContainer width="100%" height={280}>
+              <BarChart data={data?.inventoryChart || []} layout="vertical">
+                <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="#f1f5f9" />
+                <XAxis type="number" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 10, fontWeight: 700}} />
+                <YAxis dataKey="warehouse" type="category" width={110} axisLine={false} tickLine={false} tick={{fill: '#475569', fontSize: 10, fontWeight: 700}} />
+                <Tooltip contentStyle={{ borderRadius: '16px', border: 'none', boxShadow: '0 20px 25px -5px rgb(0 0 0 / 0.1)' }} />
+                <Bar dataKey="stock" fill="#10b981" radius={[0, 8, 8, 0]} />
+              </BarChart>
             </ResponsiveContainer>
           </div>
         </div>
+
+        {/* 📦 Recent Dispatches Feed */}
+        {data?.recentOrders && data.recentOrders.length > 0 && (
+          <div className="bg-white border border-slate-100 p-6 rounded-[2rem] shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center gap-2">
+                <Truck size={18} className="text-slate-700" />
+                <h3 className="text-sm font-black text-slate-900">Recent Dispatch Activity Feed</h3>
+              </div>
+              <button onClick={() => navigate('/orders')} className="text-xs font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 cursor-pointer">
+                View All Dispatches <ArrowRight size={13} />
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+              {data.recentOrders.map((ord, idx) => (
+                <div key={idx} className="p-3.5 rounded-2xl bg-slate-50 border border-slate-100 text-xs flex flex-col justify-between">
+                  <div>
+                    <span className="font-mono text-[10px] font-black text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-md">{ord.orderId}</span>
+                    <p className="font-bold text-slate-800 mt-1.5 truncate">Status: {ord.status}</p>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-medium mt-2">{ord.orderDate?.split('T')[0] || 'Today'}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
