@@ -19,13 +19,23 @@ public class DataSeeder {
     public CommandLineRunner initData() {
         return args -> {
             try {
+                // Primary Admin Account
                 String adminPhone = "9943205075";
                 User admin = userRepository.findByEmail(adminPhone).orElse(
                     User.builder().email(adminPhone).name("Agri Admin").role(User.Role.ADMIN).build()
                 );
                 admin.setPassword(passwordEncoder.encode("PugazhAlfiya"));
                 userRepository.save(admin);
-                System.out.println("Agri-WMS Admin Synchronized: " + adminPhone);
+
+                // Standard Demo Admin Account
+                String demoEmail = "admin@wms.com";
+                User demoAdmin = userRepository.findByEmail(demoEmail).orElse(
+                    User.builder().email(demoEmail).name("System Admin").role(User.Role.ADMIN).build()
+                );
+                demoAdmin.setPassword(passwordEncoder.encode("password123"));
+                userRepository.save(demoAdmin);
+
+                System.out.println("Agri-WMS Admins Synchronized: " + adminPhone + " and " + demoEmail);
             } catch (Exception ignored) {
                 System.err.println("Data seeder skipped: Could not connect to DB.");
             }
